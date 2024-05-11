@@ -11,11 +11,11 @@ export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
   if (!cookie) {
-    return NextResponse.redirect(new URL("/register", request.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
   return response;
 }
 
 export const config: MiddlewareConfig = {
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/projects"],
 };
