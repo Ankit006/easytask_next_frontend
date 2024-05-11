@@ -1,7 +1,8 @@
 import { backendAPI, cacheTags } from "@/lib/constants";
+import { IProject } from "@/models/models";
 import { cookies } from "next/headers";
 
-export async function getProjects() {
+export async function getProjects(): Promise<IProject[]> {
   const cookie = cookies().get("session");
   const res = await fetch(backendAPI.projects.list, {
     next: { tags: [cacheTags.projects] },
@@ -13,5 +14,5 @@ export async function getProjects() {
   if (!res.ok) {
     throw new Error(data.message);
   }
-  return data;
+  return data as IProject[];
 }

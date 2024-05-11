@@ -121,3 +121,7 @@ export async function createProjectAction(
   revalidateTag(cacheTags.projects);
   redirect("/projects");
 }
+
+export async function redirectProjectAction(form: FormData) {
+  redirect(`/projects/${form.get("projectId")}`);
+}
