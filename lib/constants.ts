@@ -9,6 +9,11 @@ export const backendAPI = {
     list: `${backendBaseUrl}/projects`,
     create: `${backendBaseUrl}/projects/create`,
   },
+  member: {
+    currentMember: (projectId: string) => {
+      return `${backendBaseUrl}/members/${projectId}/member`;
+    },
+  },
 };
 
 export const HttpHeaders = {
@@ -23,4 +28,5 @@ export const HttpMethods = {
 
 export const cacheTags = {
   projects: "projects",
+  currentMember: "currentMember",
 };
