@@ -1,5 +1,5 @@
 import { backendAPI, cacheTags } from "@/lib/constants";
-import { IMember, IProject } from "@/models/models";
+import { IMember, IProject, IUser } from "@/models/models";
 import { cookies } from "next/headers";
 
 export async function getProjects(): Promise<IProject[]> {
@@ -21,6 +21,20 @@ export async function getCurrentMember(projctId: string): Promise<IMember> {
   const cookie = cookies().get("session");
   const res = await fetch(backendAPI.member.currentMember(projctId), {
     next: { tags: [cacheTags.currentMember] },
+    headers: {
+      Authorization: `Bearer ${cookie?.value}`,
+    },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}
+
+export async function getUser(): Promise<IUser> {
+  const cookie = cookies().get("session");
+  const res = await fetch(backendAPI.currentUser, {
     headers: {
       Authorization: `Bearer ${cookie?.value}`,
     },

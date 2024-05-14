@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { getProjects } from "@/queries/queries";
+import { getCurrentMember, getProjects, getUser } from "@/queries/queries";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import ProjectSelectorComponent from "./ProjectSelectorComponent";
