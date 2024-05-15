@@ -1,11 +1,10 @@
-import { register } from "module";
-
 const backendBaseUrl = "http://localhost:3000";
+export const socketUrl = "http://localhost:3000";
 
 export const backendAPI = {
   register: `${backendBaseUrl}/auth/register`,
   login: `${backendBaseUrl}/auth/login`,
-  currentUser:`${backendBaseUrl}/users/current`,
+  currentUser: `${backendBaseUrl}/users/current`,
   projects: {
     list: `${backendBaseUrl}/projects`,
     create: `${backendBaseUrl}/projects/create`,

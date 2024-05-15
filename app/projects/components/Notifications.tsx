@@ -1,9 +1,12 @@
-"use client"
 
-import React from 'react'
+import { getUser } from '@/queries/queries';
+import NotificationList from './NotificationList';
 
-export default function Notifications() {
+export default async function Notifications() {
+    const user = await getUser();
     return (
-        <div>Notifications</div>
+        <div>
+            <NotificationList userId={user.id} />
+        </div>
     )
 }

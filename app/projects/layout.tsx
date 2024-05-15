@@ -1,5 +1,6 @@
 import React from "react";
 import ProjectSelector from "./components/ProjectSelector";
+import Notifications from "./components/Notifications";
 
 export default function DashboardLaylout({
     children,
@@ -7,13 +8,13 @@ export default function DashboardLaylout({
     children: React.ReactNode;
 }>) {
     return (
-        <section className="grid grid-cols-6 gap-6">
-            <div className=" px-6 my-12">
+        <section>
+            <div className=" px-6 mt-4 mb-20 flex justify-between items-center">
                 <ProjectSelector />
+                <Notifications />
             </div>
-            <div className="col-span-5">
-                <div className="container mx-auto mt-12">{children}</div>
-            </div>
+
+            <div className="container mx-auto">{children}</div>
         </section>
     );
 }
