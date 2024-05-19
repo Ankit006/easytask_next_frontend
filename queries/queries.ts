@@ -20,7 +20,7 @@ export async function getProjects(): Promise<IProject[]> {
 export async function getCurrentMember(projctId: string): Promise<IMember> {
   const cookie = cookies().get("session");
   const res = await fetch(backendAPI.member.currentMember(projctId), {
-    next: { tags: [cacheTags.currentMember] },
+    next: { tags: [`${cacheTags.currentMember}${projctId}`] },
     headers: {
       Authorization: `Bearer ${cookie?.value}`,
     },
@@ -38,6 +38,22 @@ export async function getUser(): Promise<IUser> {
     headers: {
       Authorization: `Bearer ${cookie?.value}`,
     },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}
+
+export async function getNotifications() {
+  const cookie = cookies().get("session");
+
+  const res = await fetch(backendAPI.notifications, {
+    headers: {
+      Authorization: `Bearer ${cookie?.value}`,
+    },
+    next: { tags: ["notifications"] },
   });
   const data = await res.json();
   if (!res.ok) {

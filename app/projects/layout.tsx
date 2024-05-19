@@ -1,6 +1,7 @@
 import React from "react";
-import ProjectSelector from "./components/ProjectSelector";
-import Notifications from "./components/Notifications";
+import Notifications from "../../components/rootProject/Notifications";
+import ProjectSelector from "../../components/rootProject/ProjectSelector";
+import User from "../../components/rootProject/User";
 
 export default function DashboardLaylout({
     children,
@@ -9,12 +10,16 @@ export default function DashboardLaylout({
 }>) {
     return (
         <section>
-            <div className=" px-6 mt-4 mb-20 flex justify-between items-center">
+            <div className="bg-white flex justify-between items-center border-b border-gray-300 py-4  px-6 shadow-sm">
                 <ProjectSelector />
-                <Notifications />
+                <div className="flex items-center space-x-12">
+                    <User />
+                    <Notifications />
+                </div>
             </div>
-
-            <div className="container mx-auto">{children}</div>
+            <div className="px-6 mt-4">
+                {children}
+            </div>
         </section>
     );
 }

@@ -1,6 +1,8 @@
 "use client"
 
+import { DropdownMenuContent, DropdownMenuLabel } from '@/components/ui/dropdown-menu';
 import { socket } from '@/lib/utils';
+import { DropdownMenu, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 import { BellRing } from "lucide-react";
 import { useEffect } from 'react';
 interface Props {
@@ -20,9 +22,14 @@ export default function NotificationList({ userId }: Props) {
 
     return (
         <div>
-            <button>
-                <BellRing />
-            </button>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <BellRing />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className='mr-6' align='start'>
+                    <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+                </DropdownMenuContent>
+            </DropdownMenu>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { IProject } from "@/models/models";
+import { redirectProjectAction } from "@/actions/actions";
 import {
     Select,
     SelectContent,
@@ -10,8 +10,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { redirectProjectAction } from "@/actions/actions";
-import { FormEvent, useEffect, useState } from "react";
+import { IProject } from "@/models/models";
+import { useEffect, useState } from "react";
 
 interface Props {
     projects: IProject[];

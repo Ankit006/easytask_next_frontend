@@ -1,9 +1,8 @@
 import { getCurrentMember } from "@/queries/queries";
 import clsx from "clsx";
 import Image from "next/image";
-import React from "react";
 
-export default async function CurrentMember({
+export default async function RenderCurrentMember({
     projectId,
 }: {
     projectId: string;

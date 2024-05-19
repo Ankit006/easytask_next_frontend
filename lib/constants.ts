@@ -5,6 +5,7 @@ export const backendAPI = {
   register: `${backendBaseUrl}/auth/register`,
   login: `${backendBaseUrl}/auth/login`,
   currentUser: `${backendBaseUrl}/users/current`,
+  notifications: `${backendBaseUrl}/users/notifications`,
   projects: {
     list: `${backendBaseUrl}/projects`,
     create: `${backendBaseUrl}/projects/create`,
