@@ -21,6 +21,10 @@ export const createProjectFromValidation = z.object({
   }),
 });
 
+export const searchUserValidation = z.object({
+  email: z.string().email("Please provide a valid email"),
+});
+
 export interface registerFormError {
   name: string[];
   email: string[];
@@ -36,4 +40,8 @@ export interface LoginFormError {
 export interface CreateProjectFormEror {
   title: string[];
   description: string[];
+}
+
+export interface SearchUserFormError {
+  email: string[];
 }

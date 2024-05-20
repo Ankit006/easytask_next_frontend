@@ -1,6 +1,8 @@
+import { IUser } from "@/models/models";
 import {
   CreateProjectFormEror,
   LoginFormError,
+  SearchUserFormError,
   registerFormError,
 } from "./validation";
 
@@ -17,4 +19,9 @@ export interface ILoginFromState {
 export interface ICreateProjectFormState {
   message?: string;
   error?: CreateProjectFormEror;
+}
+
+export interface ISearchUserFormState {
+  error?: SearchUserFormError;
+  users?: IUser[];
 }

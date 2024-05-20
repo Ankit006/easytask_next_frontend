@@ -12,14 +12,17 @@ import {
   ICreateProjectFormState,
   ILoginFromState,
   IResgisterFormState,
+  ISearchUserFormState,
 } from "./formState";
 import {
   CreateProjectFormEror,
   LoginFormError,
+  SearchUserFormError,
   createProjectFromValidation,
   loginFormValidation,
   registerFormError,
   registerFormValidation,
+  searchUserValidation,
 } from "./validation";
 
 import { revalidateTag } from "next/cache";
@@ -124,4 +127,32 @@ export async function createProjectAction(
 
 export async function redirectProjectAction(form: FormData) {
   redirect(`/projects/${form.get("projectId")}`);
+}
+
+export async function searchUserAction(
+  currentState: ISearchUserFormState,
+  form: FormData
+): Promise<ISearchUserFormState> {
+  const validFields = searchUserValidation.safeParse(Object.fromEntries(form));
+
+  if (!validFields.success) {
+    return {
+      error: validFields.error.flatten().fieldErrors as SearchUserFormError,
+    };
+  }
+  const session = cookies().get("session");
+  const res = await fetch(
+    `${backendAPI.member.searchUser}?emai=${validFields.data.email}`,
+    {
+      headers: {
+        Authorization: `Bearer ${session?.value}`,
+      },
+    }
+  );
+  const body = await res.json();
+  console.log(body);
+  if (!res.ok) {
+    return { error: body.message };
+  }
+  return { users: body };
 }
