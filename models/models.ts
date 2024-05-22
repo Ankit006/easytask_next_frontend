@@ -20,3 +20,9 @@ export interface IMember {
   createdAt: string;
   users: IUser;
 }
+
+export interface IError {
+  message: string;
+  error: string;
+  statusCode: number;
+}

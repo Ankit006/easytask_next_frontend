@@ -23,5 +23,6 @@ export interface ICreateProjectFormState {
 
 export interface ISearchUserFormState {
   error?: SearchUserFormError;
-  users?: IUser[];
+  user?: IUser;
+  message?: string;
 }

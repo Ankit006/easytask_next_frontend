@@ -142,17 +142,23 @@ export async function searchUserAction(
   }
   const session = cookies().get("session");
   const res = await fetch(
-    `${backendAPI.member.searchUser}?emai=${validFields.data.email}`,
+    `${backendAPI.member.searchUser}?email=${validFields.data.email}&project_id=${validFields.data.project_id}`,
     {
       headers: {
         Authorization: `Bearer ${session?.value}`,
       },
+      cache: "no-store",
     }
   );
   const body = await res.json();
-  console.log(body);
+
   if (!res.ok) {
-    return { error: body.message };
+    if (body.statusCode === 401) {
+      cookies().delete("session");
+      redirect("/login");
+    } else {
+      return { message: body.message };
+    }
   }
-  return { users: body };
+  return { user: body };
 }

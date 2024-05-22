@@ -14,9 +14,7 @@ export const backendAPI = {
     currentMember: (projectId: string) => {
       return `${backendBaseUrl}/members/${projectId}/member`;
     },
-    searchUser: (projectId: string) => {
-      return `${backendBaseUrl}/members/user-search`;
-    },
+    searchUser: `${backendBaseUrl}/members/user-search`,
   },
 };
 

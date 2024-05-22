@@ -39,7 +39,7 @@ export default function ProjectSelectorComponent({ projects }: Props) {
                         <SelectLabel>Projects</SelectLabel>
                         {projects.map((project) => (
                             <SelectItem key={project.id} value={`${project.id}`}>
-                                <button type="submit"> {project.title}</button>
+                                <button type="submit" className="truncate"> {project.title}</button>
                             </SelectItem>
                         ))}
                     </SelectGroup>
