@@ -1,13 +1,13 @@
 import { backendAPI, cacheTags } from "@/lib/constants";
-import { IMember, IProject, IUser } from "@/models/models";
-import { cookies } from "next/headers";
+import { getSession } from "@/lib/server-utils";
+import { IMember, INotification, IProject, IUser } from "@/models/models";
 
 export async function getProjects(): Promise<IProject[]> {
-  const cookie = cookies().get("session");
+  const cookie = await getSession();
   const res = await fetch(backendAPI.projects.list, {
     next: { tags: [cacheTags.projects] },
     headers: {
-      Authorization: `Bearer ${cookie?.value}`,
+      Authorization: `Bearer ${cookie}`,
     },
   });
   const data = await res.json();
@@ -18,11 +18,11 @@ export async function getProjects(): Promise<IProject[]> {
 }
 
 export async function getCurrentMember(projctId: string): Promise<IMember> {
-  const cookie = cookies().get("session");
+  const cookie = await getSession();
   const res = await fetch(backendAPI.member.currentMember(projctId), {
     next: { tags: [`${cacheTags.currentMember}${projctId}`] },
     headers: {
-      Authorization: `Bearer ${cookie?.value}`,
+      Authorization: `Bearer ${cookie}`,
     },
   });
   const data = await res.json();
@@ -33,10 +33,10 @@ export async function getCurrentMember(projctId: string): Promise<IMember> {
 }
 
 export async function getUser(): Promise<IUser> {
-  const cookie = cookies().get("session");
+  const cookie = await getSession();
   const res = await fetch(backendAPI.currentUser, {
     headers: {
-      Authorization: `Bearer ${cookie?.value}`,
+      Authorization: `Bearer ${cookie}`,
     },
   });
   const data = await res.json();
@@ -46,12 +46,12 @@ export async function getUser(): Promise<IUser> {
   return data;
 }
 
-export async function getNotifications() {
-  const cookie = cookies().get("session");
+export async function getNotifications(): Promise<INotification[]> {
+  const cookie = await getSession();
 
   const res = await fetch(backendAPI.notifications, {
     headers: {
-      Authorization: `Bearer ${cookie?.value}`,
+      Authorization: `Bearer ${cookie}`,
     },
     next: { tags: ["notifications"] },
   });

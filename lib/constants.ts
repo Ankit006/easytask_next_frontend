@@ -15,6 +15,7 @@ export const backendAPI = {
       return `${backendBaseUrl}/members/${projectId}/member`;
     },
     searchUser: `${backendBaseUrl}/members/user-search`,
+    inviteUser: `${backendBaseUrl}/members/invite`,
   },
 };
 

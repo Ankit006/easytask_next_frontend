@@ -1,35 +1,69 @@
-"use client"
+"use client";
 
-import { DropdownMenuContent, DropdownMenuLabel } from '@/components/ui/dropdown-menu';
-import { socket } from '@/lib/utils';
-import { DropdownMenu, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+
 import { BellRing } from "lucide-react";
-import { useEffect } from 'react';
+import { Button } from "../ui/button";
+import { INotification } from "@/models/models";
+import NotificationCard from "./NotificationCard";
+import { cacheClearAction, clearNotifications } from "@/actions/actions";
+import { useFormState } from "react-dom";
+import { useEffect } from "react";
+import { useToast } from "../ui/use-toast";
 interface Props {
     userId: number;
+    notifications: INotification[];
 }
-export default function NotificationList({ userId }: Props) {
+export default function NotificationList({ userId, notifications }: Props) {
+    const revalivateAction = cacheClearAction.bind(null, "notifications");
+    const [state, dispatch] = useFormState(clearNotifications, {})
+    const { toast } = useToast()
 
     useEffect(() => {
-        if (userId) {
-            socket.auth = { user_id: userId };
-            socket.on("notifications", (data) => {
-                console.log(data)
+        if (state.error) {
+            toast({
+                title: state.error
             })
-            socket.connect()
         }
-    }, [userId])
-
+    }, [state, toast])
     return (
-        <div>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <BellRing />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className='mr-6' align='start'>
-                    <DropdownMenuLabel>Notifications</DropdownMenuLabel>
-                </DropdownMenuContent>
-            </DropdownMenu>
-        </div>
-    )
+        <Dialog>
+            <DialogTrigger asChild>
+                <form action={revalivateAction}>
+                    <button>
+                        <BellRing />
+                    </button>
+                </form>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[500px] overflow-auto">
+                <DialogHeader>
+                    <DialogTitle>Notifications</DialogTitle>
+                </DialogHeader>
+                {notifications.length > 0 ? (
+                    <>
+                        <div className="flex justify-end">
+                            <form action={dispatch}>
+                                <Button variant="outline" className="text-xs">
+                                    Clear
+                                </Button>
+                            </form>
+                        </div>
+                        <div className="mt-2 flex flex-col w-full space-y-3 max-h-96 overflow-y-auto">
+                            {notifications.map((notification, index) => (
+                                <NotificationCard notification={notification} key={index} />
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    <p className="text-center text-sm text-gray-600 mt-4">No notifications </p>
+                )}
+            </DialogContent>
+        </Dialog>
+    );
 }

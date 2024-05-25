@@ -26,6 +26,11 @@ import {
 } from "./validation";
 
 import { revalidateTag } from "next/cache";
+import { getSession, errorHandler } from "@/lib/server-utils";
+
+export async function cacheClearAction(cacheName: string) {
+  revalidateTag(cacheName);
+}
 
 export async function registerAction(
   currentState: IResgisterFormState,
@@ -107,12 +112,12 @@ export async function createProjectAction(
     };
   }
 
-  const session = cookies().get("session");
+  const session = await getSession();
   const res = await fetch(backendAPI.projects.create, {
     method: HttpMethods.POST,
     body: JSON.stringify(validFields.data),
     headers: {
-      Authorization: `Bearer ${session?.value}`,
+      Authorization: `Bearer ${session}`,
       ...HttpHeaders.json,
     },
   });
@@ -140,12 +145,12 @@ export async function searchUserAction(
       error: validFields.error.flatten().fieldErrors as SearchUserFormError,
     };
   }
-  const session = cookies().get("session");
+  const session = await getSession();
   const res = await fetch(
     `${backendAPI.member.searchUser}?email=${validFields.data.email}&project_id=${validFields.data.project_id}`,
     {
       headers: {
-        Authorization: `Bearer ${session?.value}`,
+        Authorization: `Bearer ${session}`,
       },
       cache: "no-store",
     }
@@ -161,4 +166,48 @@ export async function searchUserAction(
     }
   }
   return { user: body };
+}
+
+export async function inviteUserAction(
+  userId: number,
+  projectId: number,
+  usercurrentState: { message?: string; error?: string },
+  form: FormData
+): Promise<{ message?: string; error?: string }> {
+  const session = cookies().get("session");
+  const res = await fetch(backendAPI.member.inviteUser, {
+    method: HttpMethods.POST,
+    body: JSON.stringify({ user_id: userId, project_id: projectId }),
+    headers: {
+      Authorization: `Bearer ${session?.value}`,
+      ...HttpHeaders.json,
+    },
+  });
+
+  const body = await res.json();
+
+  if (!res.ok) {
+    return { error: body.message };
+  }
+  return { message: body.message };
+}
+
+export async function clearNotifications(state: {
+  error?: string;
+  message?: string;
+}): Promise<{ error?: string; message?: string }> {
+  const session = cookies().get("session");
+  const res = await fetch(backendAPI.notifications, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${session?.value}`,
+    },
+  });
+  const body = await res.json();
+
+  if (!res.ok) {
+    return errorHandler(body);
+  }
+  revalidateTag("notifications");
+  return { message: "notifications is cleared" };
 }

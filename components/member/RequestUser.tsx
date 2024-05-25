@@ -54,7 +54,7 @@ export default function RequestUser() {
                         {state.error && <ErrorText text={state.error.email[0]} />}
                         {state.message && <ErrorText text={state.message} />}
                     </div>
-                    {state.user && <RequestUserCard user={state.user} />}
+                    {state.user && <RequestUserCard user={state.user} projectId={params.projectId} />}
                 </DialogContent>
             </Dialog>
         </div>

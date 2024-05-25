@@ -26,3 +26,11 @@ export interface IError {
   error: string;
   statusCode: number;
 }
+
+export interface INotification {
+  type: "invite";
+  id: string;
+  sender: IUser;
+  project?: IProject;
+  message?: string;
+}
