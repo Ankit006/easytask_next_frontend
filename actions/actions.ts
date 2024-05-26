@@ -211,3 +211,30 @@ export async function clearNotifications(state: {
   revalidateTag("notifications");
   return { message: "notifications is cleared" };
 }
+
+export async function clearSingleNotificationAction(
+  state: {
+    error?: string;
+  },
+  form: FormData
+): Promise<{
+  error?: string;
+}> {
+  const session = await getSession();
+  const entires = Object.fromEntries(form);
+  const res = await fetch(backendAPI.notifications, {
+    method: HttpMethods.PUT,
+    body: JSON.stringify(entires),
+    headers: {
+      Authorization: `Bearer ${session}`,
+      ...HttpHeaders.json,
+    },
+  });
+  const body = await res.json();
+
+  if (!res.ok) {
+    return errorHandler(body);
+  }
+  revalidateTag("notifications");
+  return {};
+}
