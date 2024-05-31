@@ -4,16 +4,20 @@ import { X } from "lucide-react"
 import { clearSingleNotificationAction } from "@/actions/actions";
 import { useFormState, useFormStatus } from "react-dom";
 import { useToast } from "../ui/use-toast";
+import ProjectInviteApproveBtn from "./ProjectInviteApproveBtn";
 interface Props {
     notification: INotification;
 }
 
 export default function NotificationCard({ notification }: Props) {
-    if (notification.type === "invite") {
-        return <RequestNotification notification={notification} />;
-    } else {
-        return <></>;
+
+    switch (notification.type) {
+        case "invite":
+            return <RequestNotification notification={notification} />
+        default:
+            return <></>
     }
+
 }
 
 function RequestNotification({
@@ -48,9 +52,11 @@ function RequestNotification({
                 </form>
             </div>
 
-            <div className="flex justify-end">
-                <button className="text-sm font-semibold text-blue-400">Approve</button>
+            <div className="flex justify-end mt-4">
+                <ProjectInviteApproveBtn notification={notification} />
             </div>
         </div>
     );
 }
+
+

@@ -5,6 +5,7 @@ export const backendAPI = {
   register: `${backendBaseUrl}/auth/register`,
   login: `${backendBaseUrl}/auth/login`,
   currentUser: `${backendBaseUrl}/users/current`,
+  joinProject: `${backendBaseUrl}/users/join`,
   notifications: `${backendBaseUrl}/notifications`,
   projects: {
     list: `${backendBaseUrl}/projects`,
@@ -33,4 +34,5 @@ export const HttpMethods = {
 export const cacheTags = {
   projects: "projects",
   currentMember: "currentMember",
+  notificatons: "notifications",
 };

@@ -6,6 +6,11 @@ import {
   registerFormError,
 } from "./validation";
 
+export interface IBasicFormState {
+  message?: string;
+  error?: string;
+}
+
 export interface IResgisterFormState {
   message?: string;
   error?: registerFormError;

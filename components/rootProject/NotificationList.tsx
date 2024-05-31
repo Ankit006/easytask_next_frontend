@@ -8,14 +8,14 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { BellRing } from "lucide-react";
-import { Button } from "../ui/button";
-import { INotification } from "@/models/models";
-import NotificationCard from "./NotificationCard";
 import { cacheClearAction, clearNotifications } from "@/actions/actions";
-import { useFormState } from "react-dom";
+import { INotification } from "@/models/models";
+import { BellRing } from "lucide-react";
 import { useEffect } from "react";
+import { useFormState } from "react-dom";
+import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
+import NotificationCard from "./NotificationCard";
 interface Props {
     userId: number;
     notifications: INotification[];

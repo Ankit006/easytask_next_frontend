@@ -9,6 +9,7 @@ import {
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import {
+  IBasicFormState,
   ICreateProjectFormState,
   ILoginFromState,
   IResgisterFormState,
@@ -208,7 +209,7 @@ export async function clearNotifications(state: {
   if (!res.ok) {
     return errorHandler(body);
   }
-  revalidateTag("notifications");
+  revalidateTag(cacheTags.notificatons);
   return { message: "notifications is cleared" };
 }
 
@@ -235,6 +236,32 @@ export async function clearSingleNotificationAction(
   if (!res.ok) {
     return errorHandler(body);
   }
-  revalidateTag("notifications");
+  revalidateTag(cacheTags.notificatons);
   return {};
+}
+
+export async function joinProjectAction(
+  projectId: number,
+  state: IBasicFormState,
+  form: FormData
+): Promise<IBasicFormState> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.joinProject, {
+    method: "POST",
+    body: JSON.stringify({
+      project_id: projectId,
+      notification: form.get("notification"),
+    }),
+    headers: {
+      Authorization: `Bearer ${session}`,
+      ...HttpHeaders.json,
+    },
+  });
+  const body = await res.json();
+  if (!res.ok) {
+    return errorHandler(body);
+  }
+  revalidateTag(cacheTags.projects);
+  revalidateTag(cacheTags.notificatons);
+  return { message: body.message };
 }

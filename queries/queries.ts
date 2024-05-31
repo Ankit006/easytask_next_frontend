@@ -53,7 +53,7 @@ export async function getNotifications(): Promise<INotification[]> {
     headers: {
       Authorization: `Bearer ${cookie}`,
     },
-    next: { tags: ["notifications"] },
+    next: { tags: [cacheTags.notificatons] },
   });
   const data = await res.json();
   if (!res.ok) {
