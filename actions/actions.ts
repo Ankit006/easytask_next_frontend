@@ -265,3 +265,30 @@ export async function joinProjectAction(
   revalidateTag(cacheTags.notificatons);
   return { message: body.message };
 }
+
+export async function changeMemberRoleAction(
+  memberId: number,
+  projectId: number,
+  state: IBasicFormState,
+  form: FormData
+): Promise<IBasicFormState> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.member.changeRole, {
+    method: "POST",
+    body: JSON.stringify({
+      member_id: memberId,
+      project_id: projectId,
+      role: form.get("role"),
+    }),
+    headers: {
+      Authorization: `Bearer ${session}`,
+      ...HttpHeaders.json,
+    },
+  });
+  const body = await res.json();
+  if (!res.ok) {
+    revalidateTag(cacheTags.members);
+    return errorHandler(body);
+  }
+  return { message: body.message };
+}

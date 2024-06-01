@@ -15,8 +15,12 @@ export const backendAPI = {
     currentMember: (projectId: string) => {
       return `${backendBaseUrl}/members/${projectId}/member`;
     },
+    memberList: (projectId: string) => {
+      return `${backendBaseUrl}/members/${projectId}?project_id=${projectId}`;
+    },
     searchUser: `${backendBaseUrl}/members/user-search`,
     inviteUser: `${backendBaseUrl}/members/invite`,
+    changeRole: `${backendBaseUrl}/members/role`,
   },
 };
 
@@ -35,4 +39,5 @@ export const cacheTags = {
   projects: "projects",
   currentMember: "currentMember",
   notificatons: "notifications",
+  members: "members",
 };

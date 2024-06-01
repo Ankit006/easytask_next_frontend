@@ -3,13 +3,15 @@ import SideBar from "../../../components/project/SideBar";
 
 export default function Layout({
     children,
+    params
 }: Readonly<{
     children: React.ReactNode;
+    params: { projectId: string }
 }>) {
     return (
-        <section className="flex items-start space-x-8 relative">
-            <SideBar />
-            <div className="container mx-auto">{children}</div>
+        <section className="container mx-auto mt-8">
+            <SideBar projectId={params.projectId} />
+            <div className="mt-8">{children}</div>
         </section>
     );
 }

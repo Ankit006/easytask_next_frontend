@@ -1,12 +1,13 @@
+import MembersTable from "@/components/member/MembersTable";
 import RequestUser from "@/components/member/RequestUser";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import React from "react";
 
-export default function Members() {
+export default function Members({ params }: { params: { projectId: string } }) {
     return (
         <div>
             <RequestUser />
+            <div className="mt-12">
+                <MembersTable projectId={params.projectId} />
+            </div>
         </div>
     );
 }

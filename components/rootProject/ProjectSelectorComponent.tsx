@@ -11,6 +11,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { IProject } from "@/models/models";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -19,6 +20,9 @@ interface Props {
 
 export default function ProjectSelectorComponent({ projects }: Props) {
     const [projectId, setProjectId] = useState("");
+    const params = useParams<{ projectId: string }>()
+
+
 
     useEffect(() => {
         if (projectId !== "") {
@@ -27,6 +31,12 @@ export default function ProjectSelectorComponent({ projects }: Props) {
             redirectProjectAction(formData)
         }
     }, [projectId])
+
+    useEffect(() => {
+        if (params.projectId) {
+            setProjectId(params.projectId)
+        }
+    }, [params])
 
     return (
         <form>

@@ -10,7 +10,7 @@ export default function DashboardLaylout({
 }>) {
     return (
         <section>
-            <div className="bg-white flex justify-between items-center border-b border-gray-300 py-4  px-6 shadow-sm">
+            <div className="bg-white flex justify-between items-center border-b border-gray-300 py-4  px-6">
                 <ProjectSelector />
                 <div className="flex items-center space-x-12">
                     <User />

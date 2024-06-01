@@ -1,8 +1,7 @@
-export default function Project({ params }: { params: { projectId: string } }) {
-    const projectId = params.projectId;
-
+export default function Project({ projectId }: { projectId: string }) {
     return (
-        <div className="flex justify-end mb-12">
+        <div >
+            Hello
         </div>
     );
 }

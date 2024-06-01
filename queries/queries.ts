@@ -61,3 +61,21 @@ export async function getNotifications(): Promise<INotification[]> {
   }
   return data;
 }
+
+export async function getMembers(projectId: string): Promise<IMember[]> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.member.memberList(projectId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [cacheTags.members] },
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+
+  return data;
+}

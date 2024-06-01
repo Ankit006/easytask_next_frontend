@@ -1,10 +1,11 @@
-import React from "react";
+import { getCurrentMember } from "@/queries/queries";
 import NavLinks from "./NavLinks";
 
-export default async function SideBar() {
+export default async function SideBar({ projectId }: { projectId: string }) {
+    const member = await getCurrentMember(projectId)
     return (
-        <nav className="px-2 py-4 h-[70vh] border border-gray-300 rounded-md w-48 bg-white shadow-sm">
-            <NavLinks />
+        <nav>
+            <NavLinks member={member} />
         </nav>
     );
 }
