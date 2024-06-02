@@ -12,7 +12,7 @@ export default function ProjectForm() {
     const [state, dispatch] = useFormState(createProjectAction, {});
 
     return (
-        <main>
+        <main className="rounded-md px-6 py-4 ">
             <form action={dispatch} className="grid w-full items-center gap-8">
                 <div className="flex flex-col space-y-2">
                     <Label htmlFor="title">Project title</Label>

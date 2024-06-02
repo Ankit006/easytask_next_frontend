@@ -7,14 +7,17 @@ import ProjectSelectorComponent from "./ProjectSelectorComponent";
 export default async function ProjectSelector() {
     const projects = await getProjects();
     return (
-        <div className="flex flex-col items-start">
+        <div className="flex items-center space-x-2">
             <ProjectSelectorComponent projects={projects} />
             <Link href="/projects/form">
-                <Button className="w-48 mt-4">
-                    <Plus className="mr-2" />
-                    Add project
+                <Button className="rounded">
+                    <Plus />
                 </Button>
             </Link>
         </div>
     );
 }
+
+
+
+

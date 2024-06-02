@@ -20,3 +20,17 @@ export interface IMember {
   createdAt: string;
   users: IUser;
 }
+
+export interface IError {
+  message: string;
+  error: string;
+  statusCode: number;
+}
+
+export interface INotification {
+  type: "invite";
+  id: string;
+  sender: IUser;
+  project?: IProject;
+  message?: string;
+}

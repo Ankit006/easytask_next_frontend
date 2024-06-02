@@ -1,6 +1,6 @@
 "use client";
 
-import { IProject } from "@/models/models";
+import { redirectProjectAction } from "@/actions/actions";
 import {
     Select,
     SelectContent,
@@ -10,8 +10,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { redirectProjectAction } from "@/actions/actions";
-import { FormEvent, useEffect, useState } from "react";
+import { IProject } from "@/models/models";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface Props {
     projects: IProject[];
@@ -19,6 +20,9 @@ interface Props {
 
 export default function ProjectSelectorComponent({ projects }: Props) {
     const [projectId, setProjectId] = useState("");
+    const params = useParams<{ projectId: string }>()
+
+
 
     useEffect(() => {
         if (projectId !== "") {
@@ -27,6 +31,12 @@ export default function ProjectSelectorComponent({ projects }: Props) {
             redirectProjectAction(formData)
         }
     }, [projectId])
+
+    useEffect(() => {
+        if (params.projectId) {
+            setProjectId(params.projectId)
+        }
+    }, [params])
 
     return (
         <form>
@@ -39,7 +49,7 @@ export default function ProjectSelectorComponent({ projects }: Props) {
                         <SelectLabel>Projects</SelectLabel>
                         {projects.map((project) => (
                             <SelectItem key={project.id} value={`${project.id}`}>
-                                <button type="submit"> {project.title}</button>
+                                <button type="submit" className="truncate"> {project.title}</button>
                             </SelectItem>
                         ))}
                     </SelectGroup>
