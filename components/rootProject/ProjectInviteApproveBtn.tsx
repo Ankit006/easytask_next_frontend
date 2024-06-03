@@ -1,10 +1,11 @@
 "use client";
 
-import { joinProjectAction } from "@/actions/actions";
+
 import { INotification } from "@/models/models";
 import { useFormState } from "react-dom";
 import { useToast } from "../ui/use-toast";
 import { useEffect } from "react";
+import { joinProjectAction } from "@/actions/projectAction";
 
 interface Props {
     notification: INotification

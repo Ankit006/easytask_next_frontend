@@ -1,10 +1,11 @@
 import { INotification } from "@/models/models";
 import React, { useEffect } from "react";
 import { X } from "lucide-react"
-import { clearSingleNotificationAction } from "@/actions/actions";
+
 import { useFormState, useFormStatus } from "react-dom";
 import { useToast } from "../ui/use-toast";
 import ProjectInviteApproveBtn from "./ProjectInviteApproveBtn";
+import { clearSingleNotificationAction } from "@/actions/notificationAction";
 interface Props {
     notification: INotification;
 }

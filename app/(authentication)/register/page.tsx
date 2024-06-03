@@ -15,8 +15,9 @@ import { useEffect } from "react";
 import { useFormState } from "react-dom";
 import { useToast } from "@/components/ui/use-toast"
 import Link from "next/link";
-import { registerAction } from "@/actions/actions";
+
 import FormSubmitButton from "@/components/custom/FormSubmitButton";
+import { registerAction } from "@/actions/authAction";
 
 export default function Register() {
     const currentState: IResgisterFormState = {};

@@ -1,6 +1,7 @@
 "use client";
 
-import { redirectProjectAction } from "@/actions/actions";
+
+import { redirectProjectAction } from "@/actions/projectAction";
 import {
     Select,
     SelectContent,

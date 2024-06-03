@@ -1,6 +1,6 @@
 "use client";
 
-import { createProjectAction } from "@/actions/actions";
+import { createProjectAction } from "@/actions/projectAction";
 import ErrorText from "@/components/custom/ErrorText";
 import FormSubmitButton from "@/components/custom/FormSubmitButton";
 import { Input } from "@/components/ui/input";

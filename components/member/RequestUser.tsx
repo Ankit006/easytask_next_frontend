@@ -1,4 +1,5 @@
 "use client";
+import { ISearchUserFormState } from "@/actions/formState";
 import {
     Dialog,
     DialogContent,
@@ -6,15 +7,13 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Send, Search } from "lucide-react";
+import { Search, Send } from "lucide-react";
+import { useFormState } from "react-dom";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { ISearchUserFormState } from "@/actions/formState";
-import { useFormState } from "react-dom";
-import { searchUserAction } from "@/actions/actions";
-import ErrorText from "../custom/ErrorText";
+import { searchUserAction } from "@/actions/memberAction";
 import { useParams } from "next/navigation";
-import RequestUserList from "./RequestUserCard";
+import ErrorText from "../custom/ErrorText";
 import RequestUserCard from "./RequestUserCard";
 
 export default function RequestUser() {

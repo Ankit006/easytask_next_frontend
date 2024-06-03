@@ -1,5 +1,5 @@
 "use client"
-import { IMember } from "@/models/models";
+
 import {
     Select,
     SelectContent,
@@ -8,10 +8,11 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { useEffect, useOptimistic, useState } from "react";
+import { IMember } from "@/models/models";
+import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import { changeMemberRoleAction } from "@/actions/actions";
 import { useToast } from "../ui/use-toast";
+import { changeMemberRoleAction } from "@/actions/memberAction";
 interface Props {
     member: IMember;
 }

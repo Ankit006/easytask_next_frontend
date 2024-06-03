@@ -1,6 +1,6 @@
 "use client";
 
-import { loginAction } from "@/actions/actions";
+import { loginAction } from "@/actions/authAction";
 import { ILoginFromState } from "@/actions/formState";
 import FormSubmitButton from "@/components/custom/FormSubmitButton";
 import {
