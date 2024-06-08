@@ -34,3 +34,10 @@ export interface INotification {
   project?: IProject;
   message?: string;
 }
+
+export interface IGroup {
+  id: number;
+  name: string;
+  project_id: number;
+  color?: string;
+}

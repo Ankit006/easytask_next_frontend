@@ -36,6 +36,8 @@ export default function ProjectSelectorComponent({ projects }: Props) {
     useEffect(() => {
         if (params.projectId) {
             setProjectId(params.projectId)
+        } else {
+            setProjectId("")
         }
     }, [params])
 
@@ -50,7 +52,7 @@ export default function ProjectSelectorComponent({ projects }: Props) {
                         <SelectLabel>Projects</SelectLabel>
                         {projects.map((project) => (
                             <SelectItem key={project.id} value={`${project.id}`}>
-                                <button type="submit" className="truncate"> {project.title}</button>
+                                <button type="submit" className="truncate text-sm"> {project.title}</button>
                             </SelectItem>
                         ))}
                     </SelectGroup>

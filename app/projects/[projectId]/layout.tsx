@@ -1,5 +1,6 @@
-import React from "react";
-import SideBar from "../../../components/project/SideBar";
+import React, { Suspense } from "react";
+import NavBar from "../../../components/project/NavBar";
+import { NavBarSketon } from "@/components/skeletons/skeletons";
 
 export default function Layout({
     children,
@@ -10,7 +11,11 @@ export default function Layout({
 }>) {
     return (
         <section className="container mx-auto mt-8">
-            <SideBar projectId={params.projectId} />
+            <div className="flex justify-center">
+                <Suspense fallback={<NavBarSketon />}>
+                    <NavBar projectId={params.projectId} />
+                </Suspense>
+            </div>
             <div className="mt-8">{children}</div>
         </section>
     );

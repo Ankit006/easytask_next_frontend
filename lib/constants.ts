@@ -22,6 +22,12 @@ export const backendAPI = {
     inviteUser: `${backendBaseUrl}/members/invite`,
     changeRole: `${backendBaseUrl}/members/role`,
   },
+  group: {
+    create: `${backendBaseUrl}/groups`,
+    getAll: (projectId: string | number) => {
+      return `${backendBaseUrl}/groups/${projectId}`;
+    },
+  },
 };
 
 export const HttpHeaders = {
@@ -40,4 +46,5 @@ export const cacheTags = {
   currentMember: "currentMember",
   notificatons: "notifications",
   members: "members",
+  groups: "groups",
 };

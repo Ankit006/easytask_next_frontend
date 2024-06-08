@@ -24,11 +24,9 @@ export default function RequestUser() {
         <div>
             <Dialog>
                 <DialogTrigger asChild>
-                    <div className="flex justify-end">
-                        <Button>
-                            <Send className="mr-2 w-4 h-4" /> Send request
-                        </Button>
-                    </div>
+                    <Button>
+                        <Send className="mr-2 w-4 h-4" /> Send request
+                    </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>

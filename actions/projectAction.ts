@@ -43,7 +43,7 @@ export async function createProjectAction(
     return { message: body.message };
   }
   revalidateTag(cacheTags.projects);
-  redirect("/projects");
+  return { message: "Project is created" };
 }
 
 export async function redirectProjectAction(form: FormData) {
