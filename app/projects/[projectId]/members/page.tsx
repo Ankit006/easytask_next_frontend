@@ -8,7 +8,7 @@ export default function Members({ params }: { params: { projectId: string } }) {
     return (
 
         <div className="mt-12">
-            <div className="flex items-center justify-end space-x-4">
+            <div className="flex items-center justify-end space-x-4 mb-12">
                 <Suspense fallback={<Skeleton className="w-32 h-10 rounded-md" />}>
                     <CreateGroup projectId={params.projectId} />
                 </Suspense>

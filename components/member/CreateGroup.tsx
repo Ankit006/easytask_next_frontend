@@ -7,7 +7,7 @@ import { getGroups } from "@/queries/queries";
 
 
 export default async function CreateGroup({ projectId }: { projectId: string }) {
-    const groups = getGroups(projectId)
+    const groups = await getGroups(projectId)
     return (
         <Dialog>
             <DialogTrigger asChild>

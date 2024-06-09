@@ -27,24 +27,26 @@ export default function NavBarItems({ member }: { member: IMember }) {
             href: `${basePath}/members`,
         },
         {
-            name: "Chats",
-            href: `${basePath}/chats`,
-        },
-        {
             name: "Sprints",
             href: `${basePath}/sprints`,
+        },
+        {
+            name: "Chats",
+            href: `${basePath}/chats`,
         },
     ];
 
     return (
         <div className="bg-black py-1 px-[5px] rounded-lg flex items-center space-x-2">
-            {links.map((data) => (
-                <LinkContainer key={data.name} pathname={pathname} link={data} />
-            ))}
+            <LinkContainer pathname={pathname} link={links[0]} />
+            {member.role === "admin" && (
+                <LinkContainer pathname={pathname} link={links[1]} />
+            )}
+            <LinkContainer pathname={pathname} link={links[2]} />
+            <LinkContainer pathname={pathname} link={links[3]} />
         </div>
     );
 }
-
 function LinkContainer({ pathname, link }: { pathname: string; link: ILink }) {
     return (
         <Link
