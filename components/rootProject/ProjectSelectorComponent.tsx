@@ -24,14 +24,14 @@ export default function ProjectSelectorComponent({ projects }: Props) {
     const params = useParams<{ projectId: string }>()
 
 
-
-    useEffect(() => {
+    function handleChange(projectId: string) {
         if (projectId !== "") {
             const formData = new FormData();
             formData.append("projectId", projectId);
+            setProjectId(projectId)
             redirectProjectAction(formData)
         }
-    }, [projectId])
+    }
 
     useEffect(() => {
         if (params.projectId) {
@@ -41,9 +41,10 @@ export default function ProjectSelectorComponent({ projects }: Props) {
         }
     }, [params])
 
+
     return (
         <form>
-            <Select name="projectId" value={projectId} onValueChange={setProjectId}>
+            <Select name="projectId" value={projectId} onValueChange={(value) => handleChange(value)}>
                 <SelectTrigger className="w-48">
                     <SelectValue placeholder="Select a project" />
                 </SelectTrigger>

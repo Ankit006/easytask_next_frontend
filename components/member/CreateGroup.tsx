@@ -6,8 +6,8 @@ import { Input } from "@/components/ui/input"
 import { getGroups } from "@/queries/queries";
 
 
-export default async function CreateGroup({ params }: { params: { projectId: string } }) {
-    const groups = getGroups(params.projectId)
+export default async function CreateGroup({ projectId }: { projectId: string }) {
+    const groups = getGroups(projectId)
     return (
         <Dialog>
             <DialogTrigger asChild>
