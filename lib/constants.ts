@@ -27,6 +27,9 @@ export const backendAPI = {
     getAll: (projectId: string | number) => {
       return `${backendBaseUrl}/groups/${projectId}`;
     },
+    remove: (groupdId: number | string, projectId: string | number) => {
+      return `${backendBaseUrl}/groups/${groupdId}?project_id=${projectId}`;
+    },
   },
 };
 

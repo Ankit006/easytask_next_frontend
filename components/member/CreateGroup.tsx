@@ -1,13 +1,22 @@
-import React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Save, UsersRound } from "lucide-react";
-import { Input } from "@/components/ui/input"
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 import { getGroups } from "@/queries/queries";
+import { UsersRound } from "lucide-react";
+import GroupFrom from "./GroupFrom";
+import GroupItem from "./GroupItem";
 
-
-export default async function CreateGroup({ projectId }: { projectId: string }) {
-    const groups = await getGroups(projectId)
+export default async function CreateGroup({
+    projectId,
+}: {
+    projectId: string;
+}) {
+    const groups = await getGroups(projectId);
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -20,16 +29,11 @@ export default async function CreateGroup({ projectId }: { projectId: string }) 
                 <DialogHeader>
                     <DialogTitle>Create group</DialogTitle>
                 </DialogHeader>
-                <div>
-                    <form action="" className="flex items-center space-x-4">
-                        <Input
-                            name="group"
-                            placeholder="name of group"
-                        />
-                        <Button>
-                            <Save className="w-4 h-4" />
-                        </Button>
-                    </form>
+                <GroupFrom />
+                <div className="flex flex-wrap space-x-3 items-center space-y-2">
+                    {groups.map((group) => (
+                        <GroupItem key={group.id} group={group} />
+                    ))}
                 </div>
             </DialogContent>
         </Dialog>
