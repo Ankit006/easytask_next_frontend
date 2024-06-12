@@ -100,3 +100,18 @@ export async function getGroups(projectId: string): Promise<IGroup[]> {
   }
   return data;
 }
+
+export async function getAssignedGroups(memberId: number): Promise<IGroup[]> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.group.assignedGroups(memberId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [`${cacheTags.assignedGroups}-${memberId}`] },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}

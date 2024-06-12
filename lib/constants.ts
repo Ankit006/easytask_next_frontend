@@ -30,6 +30,18 @@ export const backendAPI = {
     remove: (groupdId: number | string, projectId: string | number) => {
       return `${backendBaseUrl}/groups/${groupdId}?project_id=${projectId}`;
     },
+    assignedGroups: (memberId: number | string) => {
+      return `${backendBaseUrl}/groups/member/${memberId}`;
+    },
+    assignMemberToGroup: `${backendBaseUrl}/groups/member/assign`,
+    unAssignMemberToGroup: `${backendBaseUrl}/groups/member/unassign`,
+
+    unassignedGroups: (
+      memberId: number | string,
+      projectId: string | number
+    ) => {
+      return `${backendBaseUrl}/groups/${memberId}/${projectId}`;
+    },
   },
 };
 
@@ -50,4 +62,6 @@ export const cacheTags = {
   notificatons: "notifications",
   members: "members",
   groups: "groups",
+  assignedGroups: "assignedGroups",
+  unassignedGroups: "unassignedGroups",
 };

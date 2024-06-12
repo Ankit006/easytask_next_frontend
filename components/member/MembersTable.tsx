@@ -6,7 +6,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { getMembers } from "@/queries/queries";
+import { getGroups, getMembers } from "@/queries/queries";
+import MemberGroups from "./MemberGroups";
 import MemberRoleSelector from "./MemberRoleSelector";
 
 export default async function MembersTable({
@@ -15,7 +16,7 @@ export default async function MembersTable({
     projectId: string;
 }) {
     const members = await getMembers(projectId);
-
+    const groups = await getGroups(projectId);
     return (
         <Table>
             <TableHeader>
@@ -23,6 +24,8 @@ export default async function MembersTable({
                     <TableHead>Name</TableHead>
                     <TableHead>Email</TableHead>
                     <TableHead>Role</TableHead>
+                    <TableHead>Groups</TableHead>
+
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -36,6 +39,9 @@ export default async function MembersTable({
                             ) : (
                                 <p className="font-semibold text-red-600"> {member.role}</p>
                             )}
+                        </TableCell>
+                        <TableCell>
+                            <MemberGroups memberId={member.id} projectId={projectId} groups={groups} />
                         </TableCell>
                     </TableRow>
                 ))}
