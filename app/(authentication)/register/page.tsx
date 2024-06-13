@@ -15,8 +15,9 @@ import { useEffect } from "react";
 import { useFormState } from "react-dom";
 import { useToast } from "@/components/ui/use-toast"
 import Link from "next/link";
-import { registerAction } from "@/actions/actions";
+
 import FormSubmitButton from "@/components/custom/FormSubmitButton";
+import { registerAction } from "@/actions/authAction";
 
 export default function Register() {
     const currentState: IResgisterFormState = {};
@@ -116,9 +117,9 @@ export default function Register() {
                     <div className="flex justify-end">
                         <FormSubmitButton text="register" />
                     </div>
-                    <p className="text-center text-sm text-slate-700 mt-4">
+                    <p className="text-center text-sm text-slate-700 dark:text-white mt-4">
                         Already have an account?{" "}
-                        <Link className="text-slate-900 font-semibold" href="/login">
+                        <Link className="text-slate-900 dark:text-white font-semibold" href="/login">
                             Login
                         </Link>
                     </p>

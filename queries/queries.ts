@@ -1,6 +1,12 @@
 import { backendAPI, cacheTags } from "@/lib/constants";
 import { getSession } from "@/lib/server-utils";
-import { IMember, INotification, IProject, IUser } from "@/models/models";
+import {
+  IGroup,
+  IMember,
+  INotification,
+  IProject,
+  IUser,
+} from "@/models/models";
 
 export async function getProjects(): Promise<IProject[]> {
   const cookie = await getSession();
@@ -77,5 +83,35 @@ export async function getMembers(projectId: string): Promise<IMember[]> {
     throw new Error(data.message);
   }
 
+  return data;
+}
+
+export async function getGroups(projectId: string): Promise<IGroup[]> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.group.getAll(projectId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [cacheTags.groups] },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}
+
+export async function getAssignedGroups(memberId: number): Promise<IGroup[]> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.group.assignedGroups(memberId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [`${cacheTags.assignedGroups}-${memberId}`] },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
   return data;
 }

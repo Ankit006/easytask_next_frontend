@@ -1,6 +1,6 @@
 export default function Project({ projectId }: { projectId: string }) {
     return (
-        <div >
+        <div>
             Hello
         </div>
     );

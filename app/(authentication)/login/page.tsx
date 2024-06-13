@@ -1,6 +1,6 @@
 "use client";
 
-import { loginAction } from "@/actions/actions";
+import { loginAction } from "@/actions/authAction";
 import { ILoginFromState } from "@/actions/formState";
 import FormSubmitButton from "@/components/custom/FormSubmitButton";
 import {
@@ -59,7 +59,7 @@ export default function Login() {
                     <div className="flex flex-col space-y-2">
                         <Label htmlFor="password">
                             Password{" "}
-                            <span className="text-xs text-slate-500">
+                            <span className="text-xs text-slate-500 dark:text-gray-300">
                                 (at least 8 characters)
                             </span>
                         </Label>
@@ -81,9 +81,9 @@ export default function Login() {
                     <div className="flex justify-end">
                         <FormSubmitButton text="register" />
                     </div>
-                    <p className="text-center text-sm text-slate-700 mt-4">
+                    <p className="text-center text-sm text-slate-700 dark:text-white mt-4">
                         Do not have an account?{" "}
-                        <Link className="text-slate-900 font-semibold" href="/register">
+                        <Link className="text-slate-900 dark:text-white font-semibold" href="/register">
                             Register
                         </Link>
                     </p>

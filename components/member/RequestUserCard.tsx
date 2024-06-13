@@ -2,9 +2,9 @@
 import { IUser } from "@/models/models";
 import FormSubmitButton from "../custom/FormSubmitButton";
 import { useFormState } from "react-dom";
-import { inviteUserAction } from "@/actions/actions";
 import { useEffect } from "react";
 import { useToast } from "../ui/use-toast";
+import { inviteUserAction } from "@/actions/memberAction";
 
 interface Props {
     user: IUser;
