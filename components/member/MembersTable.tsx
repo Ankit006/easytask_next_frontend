@@ -9,11 +9,14 @@ import {
 import { getGroups, getMembers } from "@/queries/queries";
 import MemberGroups from "./MemberGroups";
 import MemberRoleSelector from "./MemberRoleSelector";
+import { IMember } from "@/models/models";
 
 export default async function MembersTable({
     projectId,
+    currentMember,
 }: {
     projectId: string;
+    currentMember: IMember;
 }) {
     const members = await getMembers(projectId);
     const groups = await getGroups(projectId);
@@ -25,7 +28,6 @@ export default async function MembersTable({
                     <TableHead>Email</TableHead>
                     <TableHead>Role</TableHead>
                     <TableHead>Groups</TableHead>
-
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -33,15 +35,28 @@ export default async function MembersTable({
                     <TableRow key={member.id}>
                         <TableCell>{member.users.name}</TableCell>
                         <TableCell>{member.users.email}</TableCell>
+                        {currentMember.role === "admin" ? (
+                            <TableCell>
+                                {member.role !== "admin" ? (
+                                    <MemberRoleSelector member={member} />
+                                ) : (
+                                    <p className="font-semibold text-red-600"> {member.role}</p>
+                                )}
+                            </TableCell>
+                        ) : (
+                            <TableCell
+                                className={`${member.role === "admin" && "text-red-600 font-semibold"
+                                    }`}
+                            >
+                                {member.role}
+                            </TableCell>
+                        )}
                         <TableCell>
-                            {member.role !== "admin" ? (
-                                <MemberRoleSelector member={member} />
-                            ) : (
-                                <p className="font-semibold text-red-600"> {member.role}</p>
-                            )}
-                        </TableCell>
-                        <TableCell>
-                            <MemberGroups memberId={member.id} projectId={projectId} groups={groups} />
+                            <MemberGroups
+                                memberId={member.id}
+                                projectId={projectId}
+                                groups={groups}
+                            />
                         </TableCell>
                     </TableRow>
                 ))}
