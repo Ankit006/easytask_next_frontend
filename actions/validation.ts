@@ -46,3 +46,19 @@ export interface CreateProjectFormEror {
 export interface SearchUserFormError {
   email: string[];
 }
+
+export const userStoryFormValidation = z.object({
+  title: z.string().min(1, "Please provide a title"),
+  description: z.string().min(1, "Please provide a description"),
+  priority: z.string().min(1, "Please choose a priority"),
+  status: z.string().min(1, "Please choose a status"),
+  estimate_date: z.string().min(1, "Plesae choose an estimate date"),
+});
+
+export interface UserStoryFormError {
+  title: string[];
+  description: string[];
+  priority: string[];
+  status: string[];
+  estimate_date: string[];
+}

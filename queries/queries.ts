@@ -31,6 +31,7 @@ export async function getCurrentMember(projctId: string): Promise<IMember> {
       Authorization: `Bearer ${cookie}`,
     },
   });
+
   const data = await res.json();
   if (!res.ok) {
     throw new Error(data.message);
