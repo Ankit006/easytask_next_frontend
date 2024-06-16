@@ -26,7 +26,7 @@ export async function searchUserAction(
   }
   const session = await getSession();
   const res = await fetch(
-    `${backendAPI.member.searchUser}?email=${validFields.data.email}&project_id=${validFields.data.project_id}`,
+    `${backendAPI.member.searchUser}?email=${validFields.data.email}&projectId=${validFields.data.projectId}`,
     {
       headers: {
         Authorization: `Bearer ${session}`,
@@ -56,7 +56,7 @@ export async function inviteUserAction(
   const session = cookies().get("session");
   const res = await fetch(backendAPI.member.inviteUser, {
     method: HttpMethods.POST,
-    body: JSON.stringify({ user_id: userId, project_id: projectId }),
+    body: JSON.stringify({ userId: userId, projectId: projectId }),
     headers: {
       Authorization: `Bearer ${session?.value}`,
       ...HttpHeaders.json,
@@ -82,7 +82,7 @@ export async function changeMemberRoleAction(
     method: "POST",
     body: JSON.stringify({
       member_id: memberId,
-      project_id: projectId,
+      projectId: projectId,
       role: form.get("role"),
     }),
     headers: {

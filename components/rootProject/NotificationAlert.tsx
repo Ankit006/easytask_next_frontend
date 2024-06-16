@@ -8,7 +8,7 @@ export default function NotificationAlert({ userId }: { userId: number }) {
     const { toast } = useToast()
     useEffect(() => {
         if (userId) {
-            socket.auth = { user_id: userId }
+            socket.auth = { userId: userId }
             socket.connect();
             socket.on("notification", (args) => {
                 toast({ title: args })
