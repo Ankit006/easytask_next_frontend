@@ -1,17 +1,38 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from '../ui/button'
 import UserStoryForm from './UserStoryForm'
 import FormSubmitButton from '../custom/FormSubmitButton'
 import { useFormState } from 'react-dom'
 import { createUserStoryAction } from '@/actions/userStoryAction'
+import { useToast } from '../ui/use-toast'
 
-export default function CreateUserStoryDialog() {
-    const [state, dispatch] = useFormState(createUserStoryAction, {})
+export default function CreateUserStoryDialog({ projectId }: { projectId: number }) {
+    const [state, dispatch] = useFormState(createUserStoryAction.bind(null, projectId), {})
+    const [open, setOpen] = useState(false)
+    const { toast } = useToast()
+
+
+    useEffect(() => {
+        if (state.message) {
+            toast({
+                title: state.message
+            })
+            setOpen(false)
+        }
+
+        if (state.error) {
+            toast({
+                title: state.error,
+                variant: "destructive"
+            })
+        }
+    }, [state, toast])
+
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button>
                     Add user story

@@ -43,6 +43,10 @@ export const backendAPI = {
       return `${backendBaseUrl}/groups/${memberId}/${projectId}`;
     },
   },
+
+  userStory: {
+    create: `${backendBaseUrl}/user-stories`,
+  },
 };
 
 export const HttpHeaders = {

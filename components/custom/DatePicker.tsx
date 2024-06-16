@@ -47,7 +47,7 @@ export function DatePicker({ inputName, fieldName }: Props) {
             </Popover>
             <input
                 type="hidden"
-                value={date?.toLocaleDateString()}
+                value={date?.toLocaleDateString() || ""}
                 name={inputName}
             />
         </div>
