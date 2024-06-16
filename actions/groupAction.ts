@@ -30,7 +30,7 @@ export async function createGroupAction(
     method: HttpMethods.POST,
 
     body: JSON.stringify({
-      project_id: parseInt(projectId),
+      projectId: parseInt(projectId),
       name: payload.name,
       color: payload.colorTag,
     }),

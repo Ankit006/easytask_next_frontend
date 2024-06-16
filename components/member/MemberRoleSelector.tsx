@@ -18,7 +18,7 @@ interface Props {
 }
 export default function MemberRoleSelector({ member }: Props) {
     const [role, setRole] = useState("");
-    const [state, dispatch] = useFormState(changeMemberRoleAction.bind(null, member.user_id, member.project_id), {});
+    const [state, dispatch] = useFormState(changeMemberRoleAction.bind(null, member.userId, member.projectId), {});
     const { pending } = useFormStatus()
     const { toast } = useToast()
     useEffect(() => {

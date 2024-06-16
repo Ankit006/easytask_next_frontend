@@ -16,7 +16,7 @@ export const backendAPI = {
       return `${backendBaseUrl}/members/${projectId}/member`;
     },
     memberList: (projectId: string) => {
-      return `${backendBaseUrl}/members/${projectId}?project_id=${projectId}`;
+      return `${backendBaseUrl}/members/${projectId}?projectId=${projectId}`;
     },
     searchUser: `${backendBaseUrl}/members/user-search`,
     inviteUser: `${backendBaseUrl}/members/invite`,
@@ -28,7 +28,7 @@ export const backendAPI = {
       return `${backendBaseUrl}/groups/${projectId}`;
     },
     remove: (groupdId: number | string, projectId: string | number) => {
-      return `${backendBaseUrl}/groups/${groupdId}?project_id=${projectId}`;
+      return `${backendBaseUrl}/groups/${groupdId}?projectId=${projectId}`;
     },
     assignedGroups: (memberId: number | string) => {
       return `${backendBaseUrl}/groups/member/${memberId}`;

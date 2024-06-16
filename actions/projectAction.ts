@@ -59,7 +59,7 @@ export async function joinProjectAction(
   const res = await fetch(backendAPI.joinProject, {
     method: "POST",
     body: JSON.stringify({
-      project_id: projectId,
+      projectId: projectId,
       notification: form.get("notification"),
     }),
     headers: {

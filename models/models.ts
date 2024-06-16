@@ -14,8 +14,8 @@ export interface IUser {
 
 export interface IMember {
   id: number;
-  user_id: number;
-  project_id: number;
+  userId: number;
+  projectId: number;
   role: "admin" | "moderator" | "member";
   createdAt: string;
   users: IUser;
@@ -38,6 +38,6 @@ export interface INotification {
 export interface IGroup {
   id: number;
   name: string;
-  project_id: number;
+  projectId: number;
   color?: string;
 }

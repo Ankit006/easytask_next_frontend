@@ -23,7 +23,7 @@ export const createProjectFromValidation = z.object({
 
 export const searchUserValidation = z.object({
   email: z.string().email("Please provide a valid email"),
-  project_id: z.string().transform((value) => parseInt(value)),
+  projectId: z.string().transform((value) => parseInt(value)),
 });
 
 export interface registerFormError {
