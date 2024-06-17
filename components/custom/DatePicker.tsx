@@ -16,10 +16,18 @@ import {
 interface Props {
     inputName: string;
     fieldName: string;
+    defaultValue?: string
 }
 
-export function DatePicker({ inputName, fieldName }: Props) {
+export function DatePicker({ inputName, fieldName, defaultValue }: Props) {
     const [date, setDate] = React.useState<Date>();
+
+    React.useEffect(() => {
+        if (defaultValue) {
+            const dateObj = new Date(defaultValue);
+            setDate(dateObj)
+        }
+    }, [defaultValue])
 
     return (
         <div>

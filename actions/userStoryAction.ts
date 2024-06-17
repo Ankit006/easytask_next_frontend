@@ -43,3 +43,42 @@ export async function createUserStoryAction(
 
   return { message: body.message };
 }
+
+export async function updateUserStoryAction(
+  id: number,
+  projectId: number,
+  state: IUserStoryFormState,
+  form: FormData
+) {
+  const payload = Object.fromEntries(form);
+  const validFields = userStoryFormValidation.safeParse(payload);
+  if (!validFields.success) {
+    return {
+      validation: validFields.error.flatten().fieldErrors as UserStoryFormError,
+    };
+  }
+
+  const session = await getSession();
+
+  const res = await fetch(backendAPI.userStory.update(projectId), {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${session}`,
+      ...HttpHeaders.json,
+    },
+    body: JSON.stringify({
+      ...validFields.data,
+      id,
+    }),
+  });
+
+  const body = await res.json();
+
+  if (!res.ok) {
+    return { error: body.message };
+  }
+
+  revalidateTag(cacheTags.backlogs);
+
+  return { message: body.message };
+}

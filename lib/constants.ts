@@ -46,6 +46,10 @@ export const backendAPI = {
 
   userStory: {
     create: `${backendBaseUrl}/user-stories`,
+    update: (projectId: number) => {
+      return `${backendBaseUrl}/user-stories?projectId=${projectId}`;
+    },
+
     backlogs: (projectId: number) => {
       return `${backendBaseUrl}/user-stories/backlogs/${projectId}`;
     },

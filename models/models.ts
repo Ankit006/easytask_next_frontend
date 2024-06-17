@@ -1,5 +1,5 @@
-type priority = "low" | "medium" | "high";
-type status =
+export type priority = "low" | "medium" | "high";
+export type status =
   | "active"
   | "completed"
   | "on hold"

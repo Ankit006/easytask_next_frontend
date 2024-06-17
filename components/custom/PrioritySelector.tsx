@@ -8,16 +8,18 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { priority } from "@/models/models";
 
 interface Props {
     name: string;
+    defaultValue?: priority
 }
 
 const priorities = ["low", "medium", "high"];
 
-export default function PrioritySelector({ name }: Props) {
+export default function PrioritySelector({ name, defaultValue }: Props) {
     return (
-        <Select name={name}>
+        <Select name={name} defaultValue={defaultValue}>
             <SelectTrigger>
                 <SelectValue placeholder="Select priority" />
             </SelectTrigger>
