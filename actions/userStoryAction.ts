@@ -3,7 +3,8 @@
 import { getSession } from "@/lib/server-utils";
 import { IUserStoryFormState } from "./formState";
 import { UserStoryFormError, userStoryFormValidation } from "./validation";
-import { HttpHeaders, backendAPI } from "@/lib/constants";
+import { HttpHeaders, backendAPI, cacheTags } from "@/lib/constants";
+import { revalidateTag } from "next/cache";
 
 export async function createUserStoryAction(
   projectId: number,
@@ -37,6 +38,8 @@ export async function createUserStoryAction(
   if (!res.ok) {
     return { error: body.message };
   }
+
+  revalidateTag(cacheTags.backlogs);
 
   return { message: body.message };
 }

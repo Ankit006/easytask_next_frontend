@@ -1,12 +1,10 @@
-import React from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import PrioritySelector from "../custom/PrioritySelector";
-import StatusSelector from "../custom/StatusSelector";
-import { DatePicker } from "../custom/DatePicker";
 import { UserStoryFormError } from "@/actions/validation";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { DatePicker } from "../custom/DatePicker";
 import ErrorText from "../custom/ErrorText";
+import PrioritySelector from "../custom/PrioritySelector";
 
 
 
@@ -28,24 +26,14 @@ export default function UserStoryForm({ error }: { error?: UserStoryFormError })
                 {error?.description && <ErrorText text={error.description[0]} />}
 
             </div>
-            <div className="flex items-center space-x-4">
-                <div className="flex flex-col space-y-2 w-full">
-                    <Label htmlFor="priority">Priority</Label>
-                    <PrioritySelector name="priority" />
-                    {error?.priority && <ErrorText text={error.priority[0]} />}
-
-                </div>
-
-                <div className="flex flex-col space-y-2 w-full">
-                    <Label className="status">Status</Label>
-                    <StatusSelector name="status" />
-                    {error?.status && <ErrorText text={error.status[0]} />}
-
-                </div>
+            <div className="flex flex-col space-y-2 w-full">
+                <Label htmlFor="priority">Priority</Label>
+                <PrioritySelector name="priority" />
+                {error?.priority && <ErrorText text={error.priority[0]} />}
             </div>
             <div className="flex flex-col space-y-2">
                 <Label className="estimate_date">Estimate date</Label>
-                <DatePicker fieldName="Estimate date" inputName="estimate_date" />
+                <DatePicker fieldName="Estimate date" inputName="estimateDate" />
                 {error?.estimate_date && <ErrorText text={error.estimate_date[0]} />}
             </div>
         </div>

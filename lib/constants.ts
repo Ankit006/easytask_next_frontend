@@ -46,6 +46,9 @@ export const backendAPI = {
 
   userStory: {
     create: `${backendBaseUrl}/user-stories`,
+    backlogs: (projectId: number) => {
+      return `${backendBaseUrl}/user-stories/backlogs/${projectId}`;
+    },
   },
 };
 
@@ -68,4 +71,5 @@ export const cacheTags = {
   groups: "groups",
   assignedGroups: "assignedGroups",
   unassignedGroups: "unassignedGroups",
+  backlogs: "backlogs",
 };

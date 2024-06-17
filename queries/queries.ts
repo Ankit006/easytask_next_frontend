@@ -6,6 +6,7 @@ import {
   INotification,
   IProject,
   IUser,
+  IUserStory,
 } from "@/models/models";
 
 export async function getProjects(): Promise<IProject[]> {
@@ -109,6 +110,21 @@ export async function getAssignedGroups(memberId: number): Promise<IGroup[]> {
       Authorization: `Bearer ${session}`,
     },
     next: { tags: [`${cacheTags.assignedGroups}-${memberId}`] },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}
+
+export async function getBacklogs(projectId: number): Promise<IUserStory[]> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.userStory.backlogs(projectId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [cacheTags.backlogs] },
   });
   const data = await res.json();
   if (!res.ok) {

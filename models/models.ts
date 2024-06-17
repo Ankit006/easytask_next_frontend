@@ -1,3 +1,12 @@
+type priority = "low" | "medium" | "high";
+type status =
+  | "active"
+  | "completed"
+  | "on hold"
+  | "pending"
+  | "canceled"
+  | "under investigation";
+
 export interface IProject {
   id: number;
   title: string;
@@ -40,4 +49,16 @@ export interface IGroup {
   name: string;
   projectId: number;
   color?: string;
+}
+
+export interface IUserStory {
+  id: number;
+  sprintId: number;
+  projectId: number;
+  title: string;
+  description: string;
+  priority: priority;
+  status: status;
+  estimateDate: string;
+  createdAt: string;
 }
