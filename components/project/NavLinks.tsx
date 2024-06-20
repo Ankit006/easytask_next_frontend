@@ -49,7 +49,7 @@ function LinkContainer({ pathname, link }: { pathname: string; link: ILink }) {
                 `flex items-center space-x-2 border-2 border-slate-700 rounded-2xl px-4 transition-all duration-300 ${pathname === link.href && link.background
                 }`,
                 {
-                    "pointer-events-none": pathname === link.href,
+                    "pointer-events-none": pathname.includes(link.href),
                 }
             )}
         >

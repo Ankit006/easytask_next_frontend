@@ -5,6 +5,7 @@ import {
   IMember,
   INotification,
   IProject,
+  ISprint,
   IUser,
   IUserStory,
 } from "@/models/models";
@@ -125,6 +126,21 @@ export async function getBacklogs(projectId: number): Promise<IUserStory[]> {
       Authorization: `Bearer ${session}`,
     },
     next: { tags: [cacheTags.backlogs] },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}
+
+export async function getSprints(projectId: number): Promise<ISprint[]> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.sprints.all(projectId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [cacheTags.sprints] },
   });
   const data = await res.json();
   if (!res.ok) {

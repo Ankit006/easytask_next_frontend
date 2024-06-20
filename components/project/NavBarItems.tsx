@@ -14,7 +14,6 @@ interface ILink {
 export default function NavBarItems({ member }: { member: IMember }) {
     const pathname = usePathname();
     const params = useParams<{ projectId: string }>();
-
     const basePath = `/projects/${params.projectId}`;
 
     const links: ILink[] = [

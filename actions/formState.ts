@@ -3,6 +3,7 @@ import {
   CreateProjectFormEror,
   LoginFormError,
   SearchUserFormError,
+  SprintFormError,
   UserStoryFormError,
   registerFormError,
 } from "./validation";
@@ -37,4 +38,10 @@ export interface IUserStoryFormState {
   error?: string;
   message?: string;
   validation?: UserStoryFormError;
+}
+
+export interface ISprintCreateState {
+  error?: string;
+  message?: string;
+  validation?: SprintFormError;
 }

@@ -1,7 +1,9 @@
-import React from 'react'
+import SprintSelectorContainer from '@/components/sprints/SprintSelectorContainer'
 
-export default function Sprints() {
+export default function Sprints({ params }: { params: { projectId: string } }) {
     return (
-        <div>Sprints</div>
+        <div>
+            <SprintSelectorContainer projectId={parseInt(params.projectId)} />
+        </div>
     )
 }

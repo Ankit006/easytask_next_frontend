@@ -43,7 +43,12 @@ export const backendAPI = {
       return `${backendBaseUrl}/groups/${memberId}/${projectId}`;
     },
   },
-
+  sprints: {
+    create: `${backendBaseUrl}/sprints`,
+    all: (projectId: number) => {
+      return `${backendBaseUrl}/sprints/${projectId}`;
+    },
+  },
   userStory: {
     create: `${backendBaseUrl}/user-stories`,
     update: (projectId: number) => {
@@ -76,4 +81,5 @@ export const cacheTags = {
   assignedGroups: "assignedGroups",
   unassignedGroups: "unassignedGroups",
   backlogs: "backlogs",
+  sprints: "sprints",
 };
