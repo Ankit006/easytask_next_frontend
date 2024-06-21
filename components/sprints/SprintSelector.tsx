@@ -4,7 +4,7 @@ import { ISprint } from "@/models/models";
 import { useEffect, useState } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
 import CreateSprints from "./CreateSprints";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 interface Props {
     projectId: number;
@@ -14,18 +14,25 @@ interface Props {
 export default function SprintSelector({ projectId, sprints }: Props) {
     const [sprintId, setSprintId] = useState("");
     const router = useRouter();
+    const params = useParams<{ sprintId: string, projectId: string }>()
+
 
     useEffect(() => {
-        if (sprintId !== "") {
-            const path = window.location.pathname;
-            router.push(`${path}/${sprintId}`)
-
+        if (params.sprintId) {
+            setSprintId(params.sprintId)
         }
-    }, [sprintId, router])
+    }, [params])
+
+    function onChange(sprintId: string) {
+        if (sprintId !== "" && params.projectId !== "") {
+            setSprintId(sprintId)
+            router.push(`/projects/${params.projectId}/sprints/${sprintId}`)
+        }
+    }
 
     return (
         <div className="flex items-center space-x-2">
-            <Select value={sprintId} onValueChange={setSprintId}>
+            <Select value={sprintId} onValueChange={onChange}>
                 <SelectTrigger className="w-48">
                     <SelectValue placeholder="Select sprint" />
                 </SelectTrigger>

@@ -48,6 +48,9 @@ export const backendAPI = {
     all: (projectId: number) => {
       return `${backendBaseUrl}/sprints/${projectId}`;
     },
+    get: (sprintId: number) => {
+      return `${backendBaseUrl}/sprints/sprint/${sprintId}`;
+    },
   },
   userStory: {
     create: `${backendBaseUrl}/user-stories`,

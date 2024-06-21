@@ -148,3 +148,19 @@ export async function getSprints(projectId: number): Promise<ISprint[]> {
   }
   return data;
 }
+
+export async function getSprint(sprintId: number): Promise<ISprint> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.sprints.get(sprintId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [`${cacheTags.sprints}-${sprintId}`] },
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}
