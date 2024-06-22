@@ -1,7 +1,5 @@
 import Return from '@/components/custom/Return'
 import SprintBar from '@/components/sprints/SprintBar'
-import SprintSelectorContainer from '@/components/sprints/SprintSelectorContainer'
-import React from 'react'
 
 export default function page({ params }: { params: { projectId: string, sprintId: string } }) {
 
@@ -9,7 +7,7 @@ export default function page({ params }: { params: { projectId: string, sprintId
         <div>
             <Return />
             <div className='mt-8'>
-                <SprintBar sprintId={parseInt(params.sprintId)} />
+                <SprintBar sprintId={parseInt(params.sprintId)} projectId={parseInt(params.projectId)} />
             </div>
 
         </div>

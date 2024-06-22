@@ -51,6 +51,9 @@ export const backendAPI = {
     get: (sprintId: number) => {
       return `${backendBaseUrl}/sprints/sprint/${sprintId}`;
     },
+    delete: (sprintId: number) => {
+      return `${backendBaseUrl}/sprints/sprint/${sprintId}`;
+    },
   },
   userStory: {
     create: `${backendBaseUrl}/user-stories`,

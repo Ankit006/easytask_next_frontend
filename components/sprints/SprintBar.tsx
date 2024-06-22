@@ -4,9 +4,10 @@ import SprintOptions from './SprintOptions';
 
 interface Props {
     sprintId: number;
+    projectId: number
 }
 
-export default async function SprintBar({ sprintId }: Props) {
+export default async function SprintBar({ sprintId, projectId }: Props) {
     const res = await getSprint(sprintId)
     return (
         <div className='w-full flex items-center justify-between'>
@@ -15,7 +16,7 @@ export default async function SprintBar({ sprintId }: Props) {
                 <p className='text-xs mt-1'>{res.startDate} - {res.endDate}</p>
             </div>
             <div>
-                <SprintOptions />
+                <SprintOptions sprintId={sprintId} projectId={projectId} />
             </div>
         </div>
     )

@@ -1,10 +1,10 @@
+"use server";
 import { getSession } from "@/lib/server-utils";
-import { ISprintCreateState } from "./formState";
-
-import { backendAPI, cacheTags } from "@/lib/constants";
-import { HttpHeaders } from "@/lib/constants";
-import { SprintFormError, sprintFormValidation } from "./validation";
+import { IBasicFormState, ISprintCreateState } from "./formState";
+import { redirect } from "next/navigation";
+import { HttpHeaders, backendAPI, cacheTags } from "@/lib/constants";
 import { revalidateTag } from "next/cache";
+import { SprintFormError, sprintFormValidation } from "./validation";
 export async function createSprint(
   projectId: number,
   state: ISprintCreateState,
@@ -39,4 +39,25 @@ export async function createSprint(
 
   revalidateTag(cacheTags.sprints);
   return { message: body.message };
+}
+
+export async function removeSprintAction(
+  sprintId: number,
+  projectId: number,
+  state: IBasicFormState
+): Promise<IBasicFormState> {
+  const session = await getSession();
+
+  const res = await fetch(backendAPI.sprints.delete(sprintId), {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+  });
+  const body = await res.json();
+  if (!res.ok) {
+    return { error: body.message };
+  }
+  revalidateTag(cacheTags.backlogs);
+  redirect(`/projects/${projectId}/sprints`);
 }

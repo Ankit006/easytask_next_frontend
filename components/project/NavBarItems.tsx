@@ -33,10 +33,7 @@ export default function NavBarItems({ member }: { member: IMember }) {
             name: "Sprints",
             href: `${basePath}/sprints`,
         },
-        {
-            name: "Chats",
-            href: `${basePath}/chats`,
-        },
+
     ];
 
     return (
@@ -50,7 +47,7 @@ export default function NavBarItems({ member }: { member: IMember }) {
                 <LinkContainer pathname={pathname} link={links[2]} />
             )}
             <LinkContainer pathname={pathname} link={links[3]} />
-            <LinkContainer pathname={pathname} link={links[4]} />
+
         </div>
     );
 }
