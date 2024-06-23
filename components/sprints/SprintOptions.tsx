@@ -8,18 +8,23 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ISprint } from "@/models/models";
 import { Settings2 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
+import SprintDetailsDialog from "./SprintDetailsDialog";
 import SprintRemoveAlert from "./SprintRemoveAlert";
+
 export default function SprintOptions({
-    sprintId,
     projectId,
+    sprint,
 }: {
-    sprintId: number;
     projectId: number;
+    sprint: ISprint;
 }) {
     const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
+    const [showDetails, setShowDetails] = useState(false);
+    const [showAssignLogs, setShowAssignLogs] = useState(false);
     return (
         <>
             <DropdownMenu>
@@ -32,9 +37,13 @@ export default function SprintOptions({
                     <DropdownMenuLabel>Options</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                        <DropdownMenuItem>Details</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setShowDetails(true)}>
+                            Details
+                        </DropdownMenuItem>
                         <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Assing backlogs</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setShowAssignLogs(true)}>
+                            Assing backlogs
+                        </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => setOpenDeleteAlert(true)}>
                             <button className="font-semibold text-red-500">Delete</button>
                         </DropdownMenuItem>
@@ -43,10 +52,16 @@ export default function SprintOptions({
             </DropdownMenu>
 
             <SprintRemoveAlert
-                sprintId={sprintId}
+                sprintId={sprint.id}
                 open={openDeleteAlert}
                 projectId={projectId}
                 onOpenChange={setOpenDeleteAlert}
+            />
+
+            <SprintDetailsDialog
+                sprint={sprint}
+                open={showDetails}
+                onOpenChange={setShowDetails}
             />
         </>
     );

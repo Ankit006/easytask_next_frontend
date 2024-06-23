@@ -1,4 +1,4 @@
-import { getSprint } from '@/queries/queries';
+import { getBacklogs, getSprint } from '@/queries/queries';
 import React from 'react'
 import SprintOptions from './SprintOptions';
 
@@ -16,7 +16,7 @@ export default async function SprintBar({ sprintId, projectId }: Props) {
                 <p className='text-xs mt-1'>{res.startDate} - {res.endDate}</p>
             </div>
             <div>
-                <SprintOptions sprintId={sprintId} projectId={projectId} />
+                <SprintOptions projectId={projectId} sprint={res} />
             </div>
         </div>
     )

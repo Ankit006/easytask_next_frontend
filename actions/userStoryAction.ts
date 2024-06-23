@@ -1,7 +1,7 @@
 "use server";
 
 import { getSession } from "@/lib/server-utils";
-import { IUserStoryFormState } from "./formState";
+import { IBasicFormState, IUserStoryFormState } from "./formState";
 import { UserStoryFormError, userStoryFormValidation } from "./validation";
 import { HttpHeaders, backendAPI, cacheTags } from "@/lib/constants";
 import { revalidateTag } from "next/cache";
@@ -81,4 +81,12 @@ export async function updateUserStoryAction(
   revalidateTag(cacheTags.backlogs);
 
   return { message: body.message };
+}
+
+export async function assignToSprintAction(
+  backlogId: number,
+  sprintId: number,
+  state: IBasicFormState
+): Promise<IBasicFormState> {
+  const session = await getSession();
 }
