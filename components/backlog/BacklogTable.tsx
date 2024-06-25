@@ -29,7 +29,7 @@ export default async function BacklogTable({ projectId }: Props) {
                         {backlog.estimateDate}
                     </TableCell>
                     <TableCell>
-                        <AssingSprintsDialog projectId={projectId} />
+                        <AssingSprintsDialog projectId={projectId} backlogId={backlog.id} />
                     </TableCell>
                 </TableRow>)}
             </TableBody>

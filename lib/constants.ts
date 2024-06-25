@@ -64,6 +64,8 @@ export const backendAPI = {
     backlogs: (projectId: number) => {
       return `${backendBaseUrl}/user-stories/backlogs/${projectId}`;
     },
+
+    assignToSprint: `${backendBaseUrl}/sprints/assign`,
   },
 };
 

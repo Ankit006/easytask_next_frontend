@@ -85,8 +85,34 @@ export async function updateUserStoryAction(
 
 export async function assignToSprintAction(
   backlogId: number,
-  sprintId: number,
-  state: IBasicFormState
+  state: IBasicFormState,
+  form: FormData
 ): Promise<IBasicFormState> {
+  let sprintId: string | number = form.get("sprintId") as string;
+
+  if (!sprintId) {
+    return { validation: "Please select a sprint" };
+  }
+
+  sprintId = parseInt(sprintId);
+
   const session = await getSession();
+  const res = await fetch(backendAPI.userStory.assignToSprint, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${session}`,
+      ...HttpHeaders.json,
+    },
+    body: JSON.stringify({ sprintId, backlogId }),
+  });
+
+  const body = await res.json();
+
+  if (!res.ok) {
+    return { error: body.message };
+  }
+
+  revalidateTag(cacheTags.backlogs);
+
+  return { message: body.message };
 }

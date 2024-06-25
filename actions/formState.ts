@@ -11,6 +11,7 @@ import {
 export interface IBasicFormState {
   message?: string;
   error?: string;
+  validation?: string;
 }
 
 export interface IResgisterFormState {

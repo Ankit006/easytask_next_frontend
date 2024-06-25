@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { HttpHeaders, backendAPI, cacheTags } from "@/lib/constants";
 import { revalidateTag } from "next/cache";
 import { SprintFormError, sprintFormValidation } from "./validation";
+
 export async function createSprint(
   projectId: number,
   state: ISprintCreateState,
@@ -28,6 +29,44 @@ export async function createSprint(
     },
     body: JSON.stringify({
       ...validFields.data,
+      projectId,
+    }),
+  });
+
+  const body = await res.json();
+  if (!res.ok) {
+    return { error: body.message };
+  }
+
+  revalidateTag(cacheTags.sprints);
+  return { message: body.message };
+}
+
+export async function UpdateSprintAction(
+  id: number,
+  projectId: number,
+  state: ISprintCreateState,
+  form: FormData
+): Promise<ISprintCreateState> {
+  const payload = Object.fromEntries(form);
+  const validFields = sprintFormValidation.safeParse(payload);
+  if (!validFields.success) {
+    return {
+      validation: validFields.error.flatten().fieldErrors as SprintFormError,
+    };
+  }
+
+  const session = await getSession();
+
+  const res = await fetch(backendAPI.sprints.create, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${session}`,
+      ...HttpHeaders.json,
+    },
+    body: JSON.stringify({
+      ...validFields.data,
+      id,
       projectId,
     }),
   });

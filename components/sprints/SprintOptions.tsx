@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import SprintDetailsDialog from "./SprintDetailsDialog";
 import SprintRemoveAlert from "./SprintRemoveAlert";
+import UpdateSprintDialog from "./UpdateSprintDialog";
 
 export default function SprintOptions({
     projectId,
@@ -24,7 +25,8 @@ export default function SprintOptions({
 }) {
     const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
-    const [showAssignLogs, setShowAssignLogs] = useState(false);
+    const [openUpdateForm, setOpenUpdateForm] = useState(false);
+
     return (
         <>
             <DropdownMenu>
@@ -40,9 +42,8 @@ export default function SprintOptions({
                         <DropdownMenuItem onClick={() => setShowDetails(true)}>
                             Details
                         </DropdownMenuItem>
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setShowAssignLogs(true)}>
-                            Assing backlogs
+                        <DropdownMenuItem onClick={() => setOpenUpdateForm(true)}>
+                            Edit
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => setOpenDeleteAlert(true)}>
                             <button className="font-semibold text-red-500">Delete</button>
@@ -62,6 +63,12 @@ export default function SprintOptions({
                 sprint={sprint}
                 open={showDetails}
                 onOpenChange={setShowDetails}
+            />
+            <UpdateSprintDialog
+                open={openUpdateForm}
+                onOpenChange={setOpenUpdateForm}
+                sprint={sprint}
+                projectId={projectId}
             />
         </>
     );
