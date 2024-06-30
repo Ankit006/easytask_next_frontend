@@ -35,7 +35,8 @@ export default function CreateSprints({ projectId }: { projectId: number }) {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button>
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-4 h-4 mr-2" />
+                    Create sprint
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px]">

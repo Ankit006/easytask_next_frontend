@@ -113,6 +113,7 @@ export async function assignToSprintAction(
   }
 
   revalidateTag(cacheTags.backlogs);
+  revalidateTag(cacheTags.sprintUserStory(sprintId));
 
   return { message: body.message };
 }

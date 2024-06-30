@@ -164,3 +164,21 @@ export async function getSprint(sprintId: number): Promise<ISprint> {
   }
   return data;
 }
+
+export async function getSprintUserStories(
+  sprintId: number
+): Promise<IUserStory[]> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.sprints.userStory(sprintId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [cacheTags.sprintUserStory(sprintId)] },
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}

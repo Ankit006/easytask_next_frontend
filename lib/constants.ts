@@ -54,6 +54,9 @@ export const backendAPI = {
     delete: (sprintId: number) => {
       return `${backendBaseUrl}/sprints/sprint/${sprintId}`;
     },
+    userStory: (sprintId: number) => {
+      return `${backendBaseUrl}/sprints/${sprintId}/userStory`;
+    },
   },
   userStory: {
     create: `${backendBaseUrl}/user-stories`,
@@ -90,4 +93,5 @@ export const cacheTags = {
   unassignedGroups: "unassignedGroups",
   backlogs: "backlogs",
   sprints: "sprints",
+  sprintUserStory: (sprintId: number) => `sprintUserStory-${sprintId}`,
 };
