@@ -5,7 +5,9 @@ import {
   IMember,
   INotification,
   IProject,
+  ISprint,
   IUser,
+  IUserStory,
 } from "@/models/models";
 
 export async function getProjects(): Promise<IProject[]> {
@@ -31,6 +33,7 @@ export async function getCurrentMember(projctId: string): Promise<IMember> {
       Authorization: `Bearer ${cookie}`,
     },
   });
+
   const data = await res.json();
   if (!res.ok) {
     throw new Error(data.message);
@@ -109,6 +112,52 @@ export async function getAssignedGroups(memberId: number): Promise<IGroup[]> {
     },
     next: { tags: [`${cacheTags.assignedGroups}-${memberId}`] },
   });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}
+
+export async function getBacklogs(projectId: number): Promise<IUserStory[]> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.userStory.backlogs(projectId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [cacheTags.backlogs] },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}
+
+export async function getSprints(projectId: number): Promise<ISprint[]> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.sprints.all(projectId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [cacheTags.sprints] },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}
+
+export async function getSprint(sprintId: number): Promise<ISprint> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.sprints.get(sprintId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [`${cacheTags.sprints}-${sprintId}`] },
+  });
+
   const data = await res.json();
   if (!res.ok) {
     throw new Error(data.message);

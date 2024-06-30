@@ -14,7 +14,6 @@ interface ILink {
 export default function NavBarItems({ member }: { member: IMember }) {
     const pathname = usePathname();
     const params = useParams<{ projectId: string }>();
-
     const basePath = `/projects/${params.projectId}`;
 
     const links: ILink[] = [
@@ -27,13 +26,14 @@ export default function NavBarItems({ member }: { member: IMember }) {
             href: `${basePath}/members`,
         },
         {
+            name: "Backlogs",
+            href: `${basePath}/backlogs`,
+        },
+        {
             name: "Sprints",
             href: `${basePath}/sprints`,
         },
-        {
-            name: "Chats",
-            href: `${basePath}/chats`,
-        },
+
     ];
 
     return (
@@ -42,8 +42,12 @@ export default function NavBarItems({ member }: { member: IMember }) {
             {member.role !== "member" && (
                 <LinkContainer pathname={pathname} link={links[1]} />
             )}
-            <LinkContainer pathname={pathname} link={links[2]} />
+
+            {member.role !== "member" && (
+                <LinkContainer pathname={pathname} link={links[2]} />
+            )}
             <LinkContainer pathname={pathname} link={links[3]} />
+
         </div>
     );
 }

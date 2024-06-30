@@ -46,7 +46,7 @@ export default function RequestUser() {
                                     <Search className="w-4 h-4" />
                                 </Button>
                             </div>
-                            <input type="hidden" value={params.projectId} name="project_id" />
+                            <input type="hidden" value={params.projectId} name="projectId" />
                         </form>
                         {state.error && <ErrorText text={state.error.email[0]} />}
                         {state.message && <ErrorText text={state.message} />}

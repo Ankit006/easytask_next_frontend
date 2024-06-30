@@ -23,7 +23,7 @@ export const createProjectFromValidation = z.object({
 
 export const searchUserValidation = z.object({
   email: z.string().email("Please provide a valid email"),
-  project_id: z.string().transform((value) => parseInt(value)),
+  projectId: z.string().transform((value) => parseInt(value)),
 });
 
 export interface registerFormError {
@@ -45,4 +45,32 @@ export interface CreateProjectFormEror {
 
 export interface SearchUserFormError {
   email: string[];
+}
+
+export const userStoryFormValidation = z.object({
+  title: z.string().min(1, "Please provide a title"),
+  description: z.string().min(1, "Please provide a description"),
+  priority: z.string().min(1, "Please choose a priority"),
+  estimateDate: z.string().min(1, "Plesae choose an estimate date"),
+});
+
+export interface UserStoryFormError {
+  title: string[];
+  description: string[];
+  priority: string[];
+  estimate_date: string[];
+}
+
+export const sprintFormValidation = z.object({
+  title: z.string().min(1, "Title cannot be empty"),
+  description: z.string().optional(),
+  startDate: z.string().min(1, "Start date cannot be empty"),
+  endDate: z.string().min(1, "End date cannot be empty"),
+});
+
+export interface SprintFormError {
+  title: string[];
+  description: string[];
+  startDate: string[];
+  endDate: string[];
 }

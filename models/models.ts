@@ -1,3 +1,12 @@
+export type priority = "low" | "medium" | "high";
+export type status =
+  | "active"
+  | "completed"
+  | "on hold"
+  | "pending"
+  | "canceled"
+  | "under investigation";
+
 export interface IProject {
   id: number;
   title: string;
@@ -14,8 +23,8 @@ export interface IUser {
 
 export interface IMember {
   id: number;
-  user_id: number;
-  project_id: number;
+  userId: number;
+  projectId: number;
   role: "admin" | "moderator" | "member";
   createdAt: string;
   users: IUser;
@@ -38,6 +47,27 @@ export interface INotification {
 export interface IGroup {
   id: number;
   name: string;
-  project_id: number;
+  projectId: number;
   color?: string;
+}
+
+export interface IUserStory {
+  id: number;
+  sprintId: number;
+  projectId: number;
+  title: string;
+  description: string;
+  priority: priority;
+  status: status;
+  estimateDate: string;
+  createdAt: string;
+}
+
+export interface ISprint {
+  id: number;
+  title: string;
+  description?: string;
+  startDate: string;
+  endDate: string;
+  createdAt: string;
 }

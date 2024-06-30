@@ -16,7 +16,7 @@ export const backendAPI = {
       return `${backendBaseUrl}/members/${projectId}/member`;
     },
     memberList: (projectId: string) => {
-      return `${backendBaseUrl}/members/${projectId}?project_id=${projectId}`;
+      return `${backendBaseUrl}/members/${projectId}?projectId=${projectId}`;
     },
     searchUser: `${backendBaseUrl}/members/user-search`,
     inviteUser: `${backendBaseUrl}/members/invite`,
@@ -28,7 +28,7 @@ export const backendAPI = {
       return `${backendBaseUrl}/groups/${projectId}`;
     },
     remove: (groupdId: number | string, projectId: string | number) => {
-      return `${backendBaseUrl}/groups/${groupdId}?project_id=${projectId}`;
+      return `${backendBaseUrl}/groups/${groupdId}?projectId=${projectId}`;
     },
     assignedGroups: (memberId: number | string) => {
       return `${backendBaseUrl}/groups/member/${memberId}`;
@@ -42,6 +42,30 @@ export const backendAPI = {
     ) => {
       return `${backendBaseUrl}/groups/${memberId}/${projectId}`;
     },
+  },
+  sprints: {
+    create: `${backendBaseUrl}/sprints`,
+    all: (projectId: number) => {
+      return `${backendBaseUrl}/sprints/${projectId}`;
+    },
+    get: (sprintId: number) => {
+      return `${backendBaseUrl}/sprints/sprint/${sprintId}`;
+    },
+    delete: (sprintId: number) => {
+      return `${backendBaseUrl}/sprints/sprint/${sprintId}`;
+    },
+  },
+  userStory: {
+    create: `${backendBaseUrl}/user-stories`,
+    update: (projectId: number) => {
+      return `${backendBaseUrl}/user-stories?projectId=${projectId}`;
+    },
+
+    backlogs: (projectId: number) => {
+      return `${backendBaseUrl}/user-stories/backlogs/${projectId}`;
+    },
+
+    assignToSprint: `${backendBaseUrl}/sprints/assign`,
   },
 };
 
@@ -64,4 +88,6 @@ export const cacheTags = {
   groups: "groups",
   assignedGroups: "assignedGroups",
   unassignedGroups: "unassignedGroups",
+  backlogs: "backlogs",
+  sprints: "sprints",
 };
