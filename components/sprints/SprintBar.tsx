@@ -1,6 +1,4 @@
-import { getBacklogs, getSprint } from '@/queries/queries';
-import React from 'react'
-import SprintOptions from './SprintOptions';
+import { getSprint } from '@/queries/queries';
 
 interface Props {
     sprintId: number;
@@ -12,11 +10,8 @@ export default async function SprintBar({ sprintId, projectId }: Props) {
     return (
         <div className='w-full flex items-center justify-between'>
             <div>
-                <h1 className='text-2xl font-semibold'>{res.title}</h1>
+                <h1 className='text-xl font-semibold'>{res.title}</h1>
                 <p className='text-xs mt-1'>{res.startDate} - {res.endDate}</p>
-            </div>
-            <div>
-                <SprintOptions projectId={projectId} sprint={res} />
             </div>
         </div>
     )

@@ -71,3 +71,12 @@ export interface ISprint {
   endDate: string;
   createdAt: string;
 }
+
+export interface ITask {
+  id: number;
+  task: string;
+  status: status;
+  priority: priority;
+  userStoryId: number;
+  createdAt: string;
+}

@@ -6,6 +6,7 @@ import {
   INotification,
   IProject,
   ISprint,
+  ITask,
   IUser,
   IUserStory,
 } from "@/models/models";
@@ -174,6 +175,22 @@ export async function getSprintUserStories(
       Authorization: `Bearer ${session}`,
     },
     next: { tags: [cacheTags.sprintUserStory(sprintId)] },
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+}
+
+export async function getTasks(userStoryId: number): Promise<ITask[]> {
+  const session = await getSession();
+  const res = await fetch(backendAPI.tasks.all(userStoryId), {
+    headers: {
+      Authorization: `Bearer ${session}`,
+    },
+    next: { tags: [cacheTags.tasks(userStoryId)] },
   });
 
   const data = await res.json();

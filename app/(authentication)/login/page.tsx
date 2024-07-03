@@ -79,7 +79,7 @@ export default function Login() {
                         )}
                     </div>
                     <div className="flex justify-end">
-                        <FormSubmitButton text="register" />
+                        <FormSubmitButton text="Login" />
                     </div>
                     <p className="text-center text-sm text-slate-700 dark:text-white mt-4">
                         Do not have an account?{" "}

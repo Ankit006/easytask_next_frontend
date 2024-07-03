@@ -4,6 +4,7 @@ import {
   LoginFormError,
   SearchUserFormError,
   SprintFormError,
+  TaskFormError,
   UserStoryFormError,
   registerFormError,
 } from "./validation";
@@ -45,4 +46,10 @@ export interface ISprintCreateState {
   error?: string;
   message?: string;
   validation?: SprintFormError;
+}
+
+export interface ITaskFormState {
+  error?: string;
+  message?: string;
+  validation?: TaskFormError;
 }

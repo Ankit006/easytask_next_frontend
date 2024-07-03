@@ -70,6 +70,13 @@ export const backendAPI = {
 
     assignToSprint: `${backendBaseUrl}/sprints/assign`,
   },
+
+  tasks: {
+    all: (userStoryId: number) => {
+      return `${backendBaseUrl}/tasks/${userStoryId}`;
+    },
+    create: `${backendBaseUrl}/tasks`,
+  },
 };
 
 export const HttpHeaders = {
@@ -94,4 +101,5 @@ export const cacheTags = {
   backlogs: "backlogs",
   sprints: "sprints",
   sprintUserStory: (sprintId: number) => `sprintUserStory-${sprintId}`,
+  tasks: (userStoryId: number) => `tasks-${userStoryId}`,
 };

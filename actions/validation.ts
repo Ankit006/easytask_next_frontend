@@ -74,3 +74,11 @@ export interface SprintFormError {
   startDate: string[];
   endDate: string[];
 }
+
+export const taskFormvalidation = z.object({
+  task: z.string().min(1, "Task cannot be empty"),
+});
+
+export interface TaskFormError {
+  task: string[];
+}
