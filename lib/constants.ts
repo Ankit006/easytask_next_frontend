@@ -1,5 +1,5 @@
-const backendBaseUrl = "http://localhost:3000";
-export const socketUrl = "http://localhost:3000";
+const backendBaseUrl = "http://backend:3000";
+export const socketUrl = "http://backend:3000";
 
 export const backendAPI = {
   register: `${backendBaseUrl}/auth/register`,

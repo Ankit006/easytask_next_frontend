@@ -1,5 +1,6 @@
 export type priority = "low" | "medium" | "high";
 export type status =
+  | "new"
   | "active"
   | "completed"
   | "on hold"
