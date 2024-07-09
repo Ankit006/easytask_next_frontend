@@ -14,6 +14,7 @@ interface Props {
 }
 
 const statusList = [
+    "new",
     'active',
     'completed',
     'on hold',

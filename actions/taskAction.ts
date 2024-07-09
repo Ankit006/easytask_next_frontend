@@ -15,7 +15,6 @@ export async function createTaskAction(
 ): Promise<ITaskFormState> {
   const payload = Object.fromEntries(form);
   const validFields = taskFormvalidation.safeParse(payload);
-
   if (!validFields.success) {
     return {
       validation: validFields.error.flatten().fieldErrors as TaskFormError,

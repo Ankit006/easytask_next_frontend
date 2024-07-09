@@ -77,6 +77,8 @@ export interface SprintFormError {
 
 export const taskFormvalidation = z.object({
   task: z.string().min(1, "Task cannot be empty"),
+  status: z.string().min(1, "Please select valid status").optional(),
+  priority: z.string().min(1, "Please select valid priority").optional(),
 });
 
 export interface TaskFormError {
