@@ -12,9 +12,10 @@ import { useEffect } from "react";
 
 interface Props {
   tasks: ITask[];
+  userStoryId: number;
 }
 
-export default function TaskViewer({ tasks }: Props) {
+export default function TaskViewer({ tasks, userStoryId }: Props) {
   const addTaskList = useGlobalStore((state) => state.addTaskList);
 
   useEffect(() => {
@@ -25,13 +26,13 @@ export default function TaskViewer({ tasks }: Props) {
 
   return (
     <div className="flex justify-between space-x-2">
-      <NewTaskList />
-      <ActiveTaskList />
-      <CompletedTaskList />
-      <OnHoldTaskList />
-      <PendingTaskList />
-      <CanceledTaskList />
-      <InvestigationTaskList />
+      <NewTaskList userStoryId={userStoryId} />
+      <ActiveTaskList userStoryId={userStoryId} />
+      <CompletedTaskList userStoryId={userStoryId} />
+      <OnHoldTaskList userStoryId={userStoryId} />O
+      <PendingTaskList userStoryId={userStoryId} />
+      <CanceledTaskList userStoryId={userStoryId} />
+      <InvestigationTaskList userStoryId={userStoryId} />
     </div>
   );
 }

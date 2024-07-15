@@ -38,7 +38,7 @@ export const backendAPI = {
 
     unassignedGroups: (
       memberId: number | string,
-      projectId: string | number
+      projectId: string | number,
     ) => {
       return `${backendBaseUrl}/groups/${memberId}/${projectId}`;
     },
@@ -76,6 +76,7 @@ export const backendAPI = {
       return `${backendBaseUrl}/tasks/${userStoryId}`;
     },
     create: `${backendBaseUrl}/tasks`,
+    changeStatus: `${backendBaseUrl}/tasks/status`,
   },
 };
 

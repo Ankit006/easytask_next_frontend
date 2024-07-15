@@ -2,7 +2,11 @@
 import useGlobalStore from "@/store/store";
 import TaskLists from "./TaskLists";
 
-export default function ActiveTaskList() {
+export default function ActiveTaskList({
+  userStoryId,
+}: {
+  userStoryId: number;
+}) {
   const list = useGlobalStore((state) => state.tasks);
-  return <TaskLists tasks={list} status="active" />;
+  return <TaskLists tasks={list} status="active" userStoryId={userStoryId} />;
 }

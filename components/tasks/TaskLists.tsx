@@ -1,18 +1,36 @@
 "use client";
 import { ITask, status } from "@/models/models";
-import React from "react";
+import React, { useEffect } from "react";
 import { Separator } from "../ui/separator";
 import TaskCard from "./TaskCard";
 import { v4 as uuid } from "uuid";
 import useGlobalStore from "@/store/store";
+import { useFormState } from "react-dom";
+import { changeTaskStatusAction } from "@/actions/taskAction";
+import { useToast } from "../ui/use-toast";
 
 interface Props {
   tasks: ITask[];
   status: status;
+  userStoryId: number;
 }
 
-export default function TaskLists({ tasks, status }: Props) {
+export default function TaskLists({ tasks, status, userStoryId }: Props) {
   const updateTaskStatus = useGlobalStore((state) => state.updateTaskStatus);
+  const { toast } = useToast();
+  const [state, dispatch] = useFormState(
+    changeTaskStatusAction.bind(null, userStoryId),
+    {},
+  );
+
+  useEffect(() => {
+    if (state.error) {
+      toast({
+        title: state.error,
+        variant: "destructive",
+      });
+    }
+  }, [state, toast]);
 
   function dragHandler(ev: React.DragEvent<HTMLDivElement>) {
     const target = ev.target;
@@ -34,6 +52,10 @@ export default function TaskLists({ tasks, status }: Props) {
     if (target instanceof HTMLDivElement && taskId) {
       const status = target.getAttribute("data-status") as status;
       updateTaskStatus(parseInt(taskId), status);
+      const form = new FormData();
+      form.append("taskId", taskId);
+      form.append("status", status);
+      dispatch(form);
     }
   }
 

@@ -84,3 +84,8 @@ export const taskFormvalidation = z.object({
 export interface TaskFormError {
   task: string[];
 }
+
+export const changeTaskStatusValidation = z.object({
+  taskId: z.string(),
+  status: z.string(),
+});
