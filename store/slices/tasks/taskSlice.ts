@@ -13,7 +13,7 @@ const taskSlice: StateCreator<IGlobalStore, [], [], ITaskSlice> = (
     set((state) => ({
       tasks: state.tasks.filter((data) => data.id !== task.id),
     })),
-  updateStatus: (taskId: number, status: status) => {
+  updateTaskStatus: (taskId: number, status: status) => {
     const newList = [...get().tasks];
     for (let task of newList) {
       if (task.id === taskId) {

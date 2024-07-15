@@ -4,6 +4,7 @@ import React from "react";
 import { Separator } from "../ui/separator";
 import TaskCard from "./TaskCard";
 import { v4 as uuid } from "uuid";
+import useGlobalStore from "@/store/store";
 
 interface Props {
   tasks: ITask[];
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export default function TaskLists({ tasks, status }: Props) {
+  const updateTaskStatus = useGlobalStore((state) => state.updateTaskStatus);
+
   function dragHandler(ev: React.DragEvent<HTMLDivElement>) {
     const target = ev.target;
     if (target instanceof HTMLDivElement) {
@@ -24,8 +27,23 @@ export default function TaskLists({ tasks, status }: Props) {
     ev.dataTransfer.dropEffect = "move";
   }
 
+  function dropHandler(ev: React.DragEvent<HTMLDivElement>) {
+    ev.preventDefault();
+    const taskId = ev.dataTransfer.getData("text/plain");
+    const target = ev.target;
+    if (target instanceof HTMLDivElement && taskId) {
+      const status = target.getAttribute("data-status") as status;
+      updateTaskStatus(parseInt(taskId), status);
+    }
+  }
+
   return (
-    <div className="w-[400px]" onDragOver={dragOverHandler}>
+    <div
+      className="w-[400px] pb-20"
+      onDragOver={dragOverHandler}
+      onDrop={dropHandler}
+      data-status={status}
+    >
       <h1 className="text-sm font-semibold capitalize bg-white text-secondary px-2 py-1 rounded-md">
         {status} tasks
       </h1>
