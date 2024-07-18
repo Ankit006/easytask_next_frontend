@@ -38,7 +38,7 @@ export const backendAPI = {
 
     unassignedGroups: (
       memberId: number | string,
-      projectId: string | number,
+      projectId: string | number
     ) => {
       return `${backendBaseUrl}/groups/${memberId}/${projectId}`;
     },
@@ -54,8 +54,8 @@ export const backendAPI = {
     delete: (sprintId: number) => {
       return `${backendBaseUrl}/sprints/sprint/${sprintId}`;
     },
-    userStory: (sprintId: number) => {
-      return `${backendBaseUrl}/sprints/${sprintId}/userStory`;
+    userStory: (projectId: number, sprintId: number) => {
+      return `${backendBaseUrl}/sprints/${projectId}/${sprintId}/userStory`;
     },
   },
   userStory: {

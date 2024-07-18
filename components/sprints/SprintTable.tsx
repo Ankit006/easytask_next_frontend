@@ -9,12 +9,14 @@ import {
 } from "@/components/ui/table";
 import { getSprints } from "@/queries/queries";
 import SprintTableItem from "./SprintTableItem";
+import { IMember } from "@/models/models";
 
 interface Props {
     projectId: number;
+    currentMember: IMember;
 }
 
-export default async function SprintTable({ projectId }: Props) {
+export default async function SprintTable({ projectId, currentMember }: Props) {
     const sprints = await getSprints(projectId);
 
     return (
@@ -25,7 +27,7 @@ export default async function SprintTable({ projectId }: Props) {
                     <TableHead>Start date</TableHead>
                     <TableHead>End date</TableHead>
                     <TableHead>Check</TableHead>
-                    <TableHead>Options</TableHead>
+                    {currentMember.role !== "member" && <TableHead>Options</TableHead>}
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -34,6 +36,7 @@ export default async function SprintTable({ projectId }: Props) {
                         key={sprint.id}
                         projectId={projectId}
                         sprint={sprint}
+                        currentMember={currentMember}
                     />
                 ))}
             </TableBody>

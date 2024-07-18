@@ -29,7 +29,7 @@ export default function TaskViewer({ tasks, userStoryId }: Props) {
       <NewTaskList userStoryId={userStoryId} />
       <ActiveTaskList userStoryId={userStoryId} />
       <CompletedTaskList userStoryId={userStoryId} />
-      <OnHoldTaskList userStoryId={userStoryId} />O
+      <OnHoldTaskList userStoryId={userStoryId} />
       <PendingTaskList userStoryId={userStoryId} />
       <CanceledTaskList userStoryId={userStoryId} />
       <InvestigationTaskList userStoryId={userStoryId} />

@@ -167,10 +167,11 @@ export async function getSprint(sprintId: number): Promise<ISprint> {
 }
 
 export async function getSprintUserStories(
+  projectId: number,
   sprintId: number
 ): Promise<IUserStory[]> {
   const session = await getSession();
-  const res = await fetch(backendAPI.sprints.userStory(sprintId), {
+  const res = await fetch(backendAPI.sprints.userStory(projectId, sprintId), {
     headers: {
       Authorization: `Bearer ${session}`,
     },
