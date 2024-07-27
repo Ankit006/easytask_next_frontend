@@ -1,8 +1,8 @@
 import React from "react";
-import Notifications from "../../components/rootProject/Notifications";
-import ProjectSelector from "../../components/rootProject/ProjectSelector";
-import User from "../../components/rootProject/User";
 import { Separator } from "@/components/ui/separator"
+import ProjectSelector from "@/components/rootProject/ProjectSelector";
+import User from "@/components/rootProject/User";
+import Notifications from "@/components/rootProject/Notifications";
 export default function DashboardLaylout({
     children,
 }: Readonly<{
