@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
-import NavBar from "../../../components/project/NavBar";
 import { NavBarSketon } from "@/components/skeletons/skeletons";
+import NavBar from "@/components/project/NavBar";
 
 export default function Layout({
     children,

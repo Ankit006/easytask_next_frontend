@@ -3,6 +3,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
+import ProjectSelector from "@/components/rootProject/ProjectSelector";
+import User from "@/components/rootProject/User";
+import Notifications from "@/components/rootProject/Notifications";
+import { Separator } from "@/components/ui/separator"
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -24,7 +29,19 @@ export default function RootLayout({
         " bg-background  font-sans antialiased",
         fontSans.variable
       )}>
-        {children}
+        <section>
+          <div className="bg-white dark:bg-transparent flex justify-between items-center py-4  px-6">
+            <ProjectSelector />
+            <div className="flex items-center space-x-12">
+              <User />
+              <Notifications />
+            </div>
+          </div>
+          <Separator className="mb-4" />
+          <div className="px-6 mt-4">
+            {children}
+          </div>
+        </section>
         <Toaster />
       </body>
     </html>

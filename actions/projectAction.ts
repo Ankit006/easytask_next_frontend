@@ -47,7 +47,7 @@ export async function createProjectAction(
 }
 
 export async function redirectProjectAction(form: FormData) {
-  redirect(`/projects/${form.get("projectId")}`);
+  redirect(`/project/${form.get("projectId")}`);
 }
 
 export async function joinProjectAction(
