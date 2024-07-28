@@ -14,12 +14,12 @@ interface ILink {
 export default function NavBarItems({ member }: { member: IMember }) {
     const pathname = usePathname();
     const params = useParams<{ projectId: string }>();
-    const basePath = `/projects/${params.projectId}`;
+    const basePath = `/project/${params.projectId}`;
 
     const links: ILink[] = [
         {
             name: "Dashboard",
-            href: basePath,
+            href: `${basePath}/dashboard`,
         },
         {
             name: "Members",
@@ -56,7 +56,7 @@ function LinkContainer({ pathname, link }: { pathname: string; link: ILink }) {
         <Link
             href={link.href}
             className={clsx("text-gray-300 text-sm px-4", {
-                "bg-secondary text-white px-4 py-1 rounded-md": pathname === link.href,
+                "bg-secondary text-white px-4 py-1 rounded-md": pathname.startsWith(link.href),
             })}
         >
             {link.name}

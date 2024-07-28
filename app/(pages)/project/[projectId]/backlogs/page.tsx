@@ -1,4 +1,3 @@
-import BacklogList from '@/components/backlog/BacklogList'
 import BacklogTable from '@/components/backlog/BacklogTable'
 import CreateUserStoryDialog from '@/components/backlog/CreateUserStoryDialog'
 import React from 'react'

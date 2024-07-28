@@ -41,7 +41,7 @@ export async function registerAction(
     expires,
   });
 
-  redirect("/projects");
+  redirect("/");
 }
 
 export async function loginAction(
@@ -75,5 +75,5 @@ export async function loginAction(
     expires,
   });
 
-  redirect("/projects");
+  redirect("/");
 }

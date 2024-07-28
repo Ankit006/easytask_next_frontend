@@ -2,6 +2,7 @@ import { getBacklogs } from "@/queries/queries";
 import PriorityViewer from "../custom/PriorityViewer";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
 import AssingSprintsDialog from "./AssingSprintsDialog";
+import UserStoryOptions from "../userStory/UserStoryOptions";
 
 interface Props {
     projectId: number
@@ -16,7 +17,7 @@ export default async function BacklogTable({ projectId }: Props) {
                     <TableHead>Title</TableHead>
                     <TableHead>Priority</TableHead>
                     <TableHead>Estimate date</TableHead>
-                    <TableHead>Assign</TableHead>
+                    <TableHead>Options</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -29,7 +30,7 @@ export default async function BacklogTable({ projectId }: Props) {
                         {backlog.estimateDate}
                     </TableCell>
                     <TableCell>
-                        <AssingSprintsDialog projectId={projectId} backlogId={backlog.id} />
+                        <UserStoryOptions projectId={projectId} userStoryId={backlog.id} />
                     </TableCell>
                 </TableRow>)}
             </TableBody>

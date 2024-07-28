@@ -3,11 +3,11 @@ import React, { useEffect } from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { IUserStory } from "@/models/models";
 import { Settings2 } from "lucide-react";
-import { useFormState } from "react-dom";
 import UserStoryForm from "./UserStoryForm";
 import FormSubmitButton from "../custom/FormSubmitButton";
 import { updateUserStoryAction } from "@/actions/userStoryAction";
 import { useToast } from '../ui/use-toast';
+import { useFormState } from 'react-dom';
 
 interface Props {
     userStory: IUserStory

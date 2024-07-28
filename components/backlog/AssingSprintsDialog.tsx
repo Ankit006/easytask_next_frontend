@@ -11,13 +11,13 @@ import AssignSprintForm from "./AssignSprintForm";
 
 export default async function AssingSprintsDialog({
     projectId,
-    backlogId
+    userStoryId
 }: {
     projectId: number;
-    backlogId: number
+    userStoryId: number
 }) {
     const sprints = await getSprints(projectId);
     return (
-        <AssignSprintForm backlogId={backlogId} sprints={sprints} />
+        <AssignSprintForm backlogId={userStoryId} sprints={sprints} />
     );
 }

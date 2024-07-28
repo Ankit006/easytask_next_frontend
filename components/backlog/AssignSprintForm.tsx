@@ -29,7 +29,7 @@ import ErrorText from '../custom/ErrorText';
 
 interface Props {
     sprints: ISprint[]
-    backlogId: number
+    backlogId: number;
 }
 
 export default function AssignSprintForm({ sprints, backlogId }: Props) {

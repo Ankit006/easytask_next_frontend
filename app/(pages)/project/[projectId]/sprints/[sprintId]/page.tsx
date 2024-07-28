@@ -1,26 +1,21 @@
-import UserStoryCard from "@/components/userStory/UserStoryCard";
-import { getSprintUserStories } from "@/queries/queries";
+import { TableSkeleton } from "@/components/skeletons/skeletons";
+import UserStoryTable from "@/components/userStory/UserStoryTable";
+import { Suspense } from "react";
 
 export default async function page({
     params,
 }: {
     params: { projectId: string; sprintId: string };
 }) {
-    const userStories = await getSprintUserStories(
-        parseInt(params.projectId),
-        parseInt(params.sprintId)
-    );
     return (
         <div>
-            {userStories.length === 0 && (
-                <p className="text-center mt-12 text-lg font-semibold">
-                    {"No user story is assigned to this sprint ☹️"}
-                </p>
-            )}
             <div className="mt-20">
-                {userStories.map((userStory) => (
-                    <UserStoryCard userStory={userStory} key={userStory.id} />
-                ))}
+                <Suspense fallback={<TableSkeleton />}>
+                    <UserStoryTable
+                        projectId={parseInt(params.projectId)}
+                        sprintId={parseInt(params.sprintId)}
+                    />
+                </Suspense>
             </div>
         </div>
     );
