@@ -69,8 +69,13 @@ export const backendAPI = {
     },
 
     assignToSprint: `${backendBaseUrl}/sprints/assign`,
+    deleteUserStory: (
+      userStoryId: string | number,
+      projectId: string | number
+    ) => {
+      return `${backendBaseUrl}/user-stories/${userStoryId}?projectId=${projectId}`;
+    },
   },
-
   tasks: {
     all: (userStoryId: number) => {
       return `${backendBaseUrl}/tasks/${userStoryId}`;

@@ -1,4 +1,4 @@
-import { getSprintUserStories } from "@/queries/queries";
+import { ISprint, IUserStory } from "@/models/models";
 import React from "react";
 import {
     Table,
@@ -8,40 +8,46 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import PriorityViewer from "../custom/PriorityViewer";
+import PriorityViewer from "@/components/custom/PriorityViewer";
+import UserStoryOptions from "./UserStoryOptions";
 
-export default async function UserStoryTable({
+export default function UserStoryTable({
+    userStories,
+    sprints,
     projectId,
-    sprintId,
 }: {
+    userStories: IUserStory[];
+    sprints: ISprint[];
     projectId: number;
-    sprintId: number;
 }) {
-    const res = await getSprintUserStories(projectId, sprintId);
     return (
-        <div>
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Title</TableHead>
-                        <TableHead>Priority</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Estimate date</TableHead>
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Priority</TableHead>
+                    <TableHead>Estimate date</TableHead>
+                    <TableHead>Options</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {userStories.map((story) => (
+                    <TableRow key={story.id}>
+                        <TableCell>{story.title}</TableCell>
+                        <TableCell>
+                            <PriorityViewer priority={story.priority} />
+                        </TableCell>
+                        <TableCell>{story.estimateDate}</TableCell>
+                        <TableCell>
+                            <UserStoryOptions
+                                projectId={projectId}
+                                sprints={sprints}
+                                userStory={story}
+                            />
+                        </TableCell>
                     </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {res.map((story) => (
-                        <TableRow key={story.id}>
-                            <TableCell>{story.title}</TableCell>
-                            <TableCell>
-                                <PriorityViewer priority={story.priority} />
-                            </TableCell>
-                            <TableCell>{story.status}</TableCell>
-                            <TableCell>{story.estimateDate}</TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </div>
+                ))}
+            </TableBody>
+        </Table>
     );
 }

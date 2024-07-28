@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from "react";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle
+} from "../ui/dialog";
 import {
     Select,
     SelectContent,
@@ -10,53 +16,47 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../ui/select";
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "../ui/dialog";
-import { Plus } from "lucide-react";
 
-
+import { assignToSprintAction } from "@/actions/userStoryAction";
+import { ISprint } from "@/models/models";
+import { useFormState } from "react-dom";
+import ErrorText from "../custom/ErrorText";
 import FormSubmitButton from "../custom/FormSubmitButton";
-import { ISprint } from '@/models/models';
-import { useFormState } from 'react-dom';
-import { assignToSprintAction } from '@/actions/userStoryAction';
-import { useToast } from '../ui/use-toast';
-import ErrorText from '../custom/ErrorText';
+import { useToast } from "../ui/use-toast";
 
 interface Props {
-    sprints: ISprint[]
-    backlogId: number;
+    sprints: ISprint[];
+    userStoryId: number;
+    open: boolean;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function AssignSprintForm({ sprints, backlogId }: Props) {
-    const [state, dispatch] = useFormState(assignToSprintAction.bind(null, backlogId), {})
-    const { toast } = useToast()
-    const [open, setOpen] = useState(false);
+export default function AssignSprintForm({
+    sprints,
+    userStoryId,
+    open,
+    setOpen,
+}: Props) {
+    const [state, dispatch] = useFormState(
+        assignToSprintAction.bind(null, userStoryId),
+        {}
+    );
+    const { toast } = useToast();
 
     useEffect(() => {
         if (state.error) {
             toast({
-                title: state.error
-            })
+                title: state.error,
+            });
         }
 
         if (state.message) {
-            setOpen(false)
+            setOpen(false);
         }
-    }, [state, toast])
+    }, [state, toast, setOpen]);
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-                <button className="font-bold text-blue-500 flex items-center">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Assign
-                </button>
-            </DialogTrigger>
             <DialogContent className="sm:max-w-96">
                 <DialogHeader>
                     <DialogTitle>Sprints</DialogTitle>
@@ -80,11 +80,13 @@ export default function AssignSprintForm({ sprints, backlogId }: Props) {
                         </Select>
                         <FormSubmitButton text="Assign" />
                     </form>
-                    {state.validation && <div className='mt-2'>
-                        <ErrorText text={state.validation} />
-                    </div>}
+                    {state.validation && (
+                        <div className="mt-2">
+                            <ErrorText text={state.validation} />
+                        </div>
+                    )}
                 </div>
             </DialogContent>
         </Dialog>
-    )
+    );
 }

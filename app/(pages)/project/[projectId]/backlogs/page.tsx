@@ -1,5 +1,6 @@
 import BacklogTable from '@/components/backlog/BacklogTable'
-import CreateUserStoryDialog from '@/components/backlog/CreateUserStoryDialog'
+import CreateUserStoryDialog from '@/components/userStory/CreateUserStoryDialog'
+
 import React from 'react'
 
 export default function Backlogs({ params }: { params: { projectId: string } }) {

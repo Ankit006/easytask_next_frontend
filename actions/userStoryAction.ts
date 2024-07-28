@@ -84,7 +84,7 @@ export async function updateUserStoryAction(
 }
 
 export async function assignToSprintAction(
-  backlogId: number,
+  userStoryId: number,
   state: IBasicFormState,
   form: FormData
 ): Promise<IBasicFormState> {
@@ -103,7 +103,7 @@ export async function assignToSprintAction(
       Authorization: `Bearer ${session}`,
       ...HttpHeaders.json,
     },
-    body: JSON.stringify({ sprintId, backlogId }),
+    body: JSON.stringify({ sprintId, userStoryId }),
   });
 
   const body = await res.json();
@@ -115,5 +115,29 @@ export async function assignToSprintAction(
   revalidateTag(cacheTags.backlogs);
   revalidateTag(cacheTags.sprintUserStory(sprintId));
 
+  return { message: body.message };
+}
+
+export async function deleteUserStoryAction(
+  userStoryId: number,
+  projectId: number,
+  state: IBasicFormState
+): Promise<IBasicFormState> {
+  const session = await getSession();
+  const res = await fetch(
+    backendAPI.userStory.deleteUserStory(userStoryId, projectId),
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${session}`,
+      },
+    }
+  );
+
+  const body = await res.json();
+  if (!res.ok) {
+    return { error: body.message };
+  }
+  revalidateTag(cacheTags.backlogs);
   return { message: body.message };
 }

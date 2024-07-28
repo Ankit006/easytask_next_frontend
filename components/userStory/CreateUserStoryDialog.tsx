@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from '../ui/button'
-import UserStoryForm from './UserStoryForm'
+import UserStoryForm from '../backlog/UserStoryForm'
 import FormSubmitButton from '../custom/FormSubmitButton'
 import { useFormState } from 'react-dom'
 import { createUserStoryAction } from '@/actions/userStoryAction'
