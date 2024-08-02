@@ -9,8 +9,14 @@ export default async function UserStoryTableContainer({
     sprintId: number;
 }) {
     const res = await getSprintUserStories(projectId, sprintId);
-    const sprints = await getSprints(projectId)
+    const sprints = await getSprints(projectId);
     return (
-        <UserStoryTable sprints={sprints} userStories={res} />
+        <UserStoryTable
+            sprints={sprints}
+            userStories={res}
+            projectId={projectId}
+            type="user stories"
+            currentSprintId={sprintId}
+        />
     );
 }

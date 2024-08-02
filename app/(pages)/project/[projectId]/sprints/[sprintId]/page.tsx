@@ -1,5 +1,6 @@
 import { TableSkeleton } from "@/components/skeletons/skeletons";
-// import UserStoryTable from "@/components/userStory/UserStoryTable";
+import UserStoryTableContainer from "@/components/userStory/UserStoryTableContainer";
+
 import { Suspense } from "react";
 
 export default async function page({
@@ -10,12 +11,12 @@ export default async function page({
     return (
         <div>
             <div className="mt-20">
-                {/* <Suspense fallback={<TableSkeleton />}>
-                    <UserStoryTable
+                <Suspense fallback={<TableSkeleton />}>
+                    <UserStoryTableContainer
                         projectId={parseInt(params.projectId)}
                         sprintId={parseInt(params.sprintId)}
                     />
-                </Suspense> */}
+                </Suspense>
             </div>
         </div>
     );

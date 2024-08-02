@@ -55,7 +55,6 @@ export default function SprintOptions({
             <SprintRemoveAlert
                 sprintId={sprint.id}
                 open={openDeleteAlert}
-                projectId={projectId}
                 onOpenChange={setOpenDeleteAlert}
             />
 

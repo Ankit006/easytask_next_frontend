@@ -82,7 +82,6 @@ export async function UpdateSprintAction(
 
 export async function removeSprintAction(
   sprintId: number,
-  projectId: number,
   state: IBasicFormState
 ): Promise<IBasicFormState> {
   const session = await getSession();
@@ -98,5 +97,5 @@ export async function removeSprintAction(
     return { error: body.message };
   }
   revalidateTag(cacheTags.backlogs);
-  redirect(`/projects/${projectId}/sprints`);
+  return { message: "Sprint is removed" };
 }

@@ -17,17 +17,16 @@ interface Props {
     open: boolean;
     onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
     sprintId: number;
-    projectId: number
 }
 
 export default function SprintRemoveAlert({
     open,
     onOpenChange,
     sprintId,
-    projectId
+
 }: Props) {
     const router = useRouter();
-    const [state, dispatch] = useFormState(removeSprintAction.bind(null, sprintId, projectId), {});
+    const [state, dispatch] = useFormState(removeSprintAction.bind(null, sprintId), {});
     const { toast } = useToast()
     useEffect(() => {
         if (state.error) {
@@ -37,12 +36,6 @@ export default function SprintRemoveAlert({
             })
         }
 
-        if (state.message) {
-            toast({
-                title: state.message
-            })
-            router.back()
-        }
     }, [state, toast, router])
 
     return (

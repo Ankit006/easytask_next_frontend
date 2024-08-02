@@ -13,6 +13,7 @@ export default async function BacklogTable({ projectId }: Props) {
             sprints={sprints}
             userStories={backlogs}
             projectId={projectId}
+            type="backlogs"
         />
     );
 }
