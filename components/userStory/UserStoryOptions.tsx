@@ -19,16 +19,10 @@ export default function UserStoryOptions({
     userStory,
     sprints,
     projectId,
-    type,
-    currentSprintId
 }: {
     userStory: IUserStory;
     sprints: ISprint[];
     projectId: number;
-    type: "backlogs" | "user stories",
-    currentSprintId?: number;
-
-
 }) {
     const [openAssignDialog, setOpenAssignDialog] = useState(false);
     const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
@@ -50,7 +44,10 @@ export default function UserStoryOptions({
                             Update
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                            <DeleteUserStory currentSprintId={currentSprintId} userStoryId={userStory.id} projectId={projectId} type={type} />
+                            <DeleteUserStory
+                                userStoryId={userStory.id}
+                                projectId={projectId}
+                            />
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
                 </DropdownMenuContent>

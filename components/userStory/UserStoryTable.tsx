@@ -17,12 +17,10 @@ export default function UserStoryTable({
     sprints,
     projectId,
     type,
-    currentSprintId
 }: {
     userStories: IUserStory[];
     sprints: ISprint[];
     projectId: number;
-    currentSprintId?: number;
     type: "backlogs" | "user stories"
 }) {
     return (
@@ -51,8 +49,7 @@ export default function UserStoryTable({
                                 projectId={projectId}
                                 sprints={sprints}
                                 userStory={story}
-                                type={type}
-                                currentSprintId={currentSprintId}
+
                             />
                         </TableCell>
                     </TableRow>

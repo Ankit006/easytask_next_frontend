@@ -16,7 +16,6 @@ export default async function UserStoryTableContainer({
             userStories={res}
             projectId={projectId}
             type="user stories"
-            currentSprintId={sprintId}
         />
     );
 }

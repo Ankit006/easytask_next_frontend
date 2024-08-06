@@ -8,16 +8,12 @@ import { Loader2 } from "lucide-react";
 export default function DeleteUserStory({
     userStoryId,
     projectId,
-    type,
-    currentSprintId,
 }: {
     userStoryId: number;
     projectId: number;
-    type: "backlogs" | "user stories";
-    currentSprintId?: number;
 }) {
     const [state, dispatch] = useFormState(
-        deleteUserStoryAction.bind(null, userStoryId, projectId, type),
+        deleteUserStoryAction.bind(null, userStoryId, projectId),
         {}
     );
     const { toast } = useToast();
@@ -35,7 +31,6 @@ export default function DeleteUserStory({
             className="hover:bg-secondary hover:text-red-600 text-red-500 w-full font-semibold text-sm pl-2 rounded py-1"
             action={dispatch}
         >
-            {currentSprintId && <input type="hidden" value={currentSprintId} />}
             <button>
                 {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Delete"}
             </button>

@@ -121,7 +121,6 @@ export async function assignToSprintAction(
 export async function deleteUserStoryAction(
   userStoryId: number,
   projectId: number,
-  type: "backlogs" | "user stories",
   state: IBasicFormState,
   form: FormData
 ): Promise<IBasicFormState> {
@@ -141,14 +140,5 @@ export async function deleteUserStoryAction(
     return { error: body.message };
   }
 
-  // based on backlogs or userStory revalidate cache
-  if (type === "backlogs") {
-    revalidateTag(cacheTags.backlogs);
-  } else {
-    const currentSprintId = form.get("currentSprintId") as number | null;
-    if (currentSprintId) {
-      revalidateTag(cacheTags.sprintUserStory(currentSprintId));
-    }
-  }
   return { message: body.message };
 }
