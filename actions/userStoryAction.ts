@@ -4,7 +4,7 @@ import { getSession } from "@/lib/server-utils";
 import { IBasicFormState, IUserStoryFormState } from "./formState";
 import { UserStoryFormError, userStoryFormValidation } from "./validation";
 import { HttpHeaders, backendAPI, cacheTags } from "@/lib/constants";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function createUserStoryAction(
   projectId: number,
@@ -140,5 +140,9 @@ export async function deleteUserStoryAction(
     return { error: body.message };
   }
 
+  const pathname = form.get("pathname") as string;
+  if (pathname) {
+    revalidatePath(pathname);
+  }
   return { message: body.message };
 }

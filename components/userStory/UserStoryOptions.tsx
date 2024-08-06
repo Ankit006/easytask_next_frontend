@@ -14,6 +14,8 @@ import AssingSprintsDialog from "./AssingSprintsDialog";
 import { useState } from "react";
 import UserStoryUpdateDialog from "../backlog/UserStoryUpdateDialog";
 import DeleteUserStory from "./DeleteUserStory";
+import { useParams, usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function UserStoryOptions({
     userStory,
@@ -26,6 +28,8 @@ export default function UserStoryOptions({
 }) {
     const [openAssignDialog, setOpenAssignDialog] = useState(false);
     const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
+    const params = useParams() as { projectId: string, sprintId: string };
+    const pathname = usePathname()
     return (
         <>
             <DropdownMenu>
@@ -43,12 +47,18 @@ export default function UserStoryOptions({
                         <DropdownMenuItem onClick={() => setOpenUpdateDialog(true)}>
                             Update
                         </DropdownMenuItem>
+                        {params.sprintId && <DropdownMenuItem asChild>
+                            <Link href={`${pathname}/${userStory.id}`}>
+                                Tasks
+                            </Link>
+                        </DropdownMenuItem>}
                         <DropdownMenuItem asChild>
                             <DeleteUserStory
                                 userStoryId={userStory.id}
                                 projectId={projectId}
                             />
                         </DropdownMenuItem>
+
                     </DropdownMenuGroup>
                 </DropdownMenuContent>
             </DropdownMenu>

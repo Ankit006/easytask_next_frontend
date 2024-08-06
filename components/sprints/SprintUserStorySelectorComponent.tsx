@@ -27,7 +27,7 @@ export default function SprintUserStorySelectorComponent({ userStories, projectI
     return (
         <div>
             <Select value={userStoryId} onValueChange={handleChange}>
-                <SelectTrigger className='w-48'>
+                <SelectTrigger className='w-56'>
                     <SelectValue placeholder="Select user story" />
                 </SelectTrigger>
                 <SelectContent>
